@@ -49,8 +49,8 @@ export default function MultiStepForm() {
             alert("You must agree to the Terms and Conditions to submit.");
             return;
         }
-        // Route to the new checkout page, passing ID or state later if needed
-        router.push('/checkout');
+        // Open Revolut checkout link in the same tab
+        window.location.href = "https://checkout.revolut.com/payment-link/39be6362-9836-4069-b627-3c8c3af46832";
     };
 
     return (
