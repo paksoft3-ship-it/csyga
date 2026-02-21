@@ -1,0 +1,140 @@
+{
+    "hero": {
+        "badge": "CSYGA – Center For Strategic Youth & Global Affairs",
+        "headline": "Cultivating Strategic Youth for Global Action",
+        "description": "The Center for Strategic Youth and Global Affairs (CSYGA) is a youth-led platform dedicated to equipping the next generation of leaders with strategic tools to influence global policy and governance. From diplomacy and conflict resolution to academic exchange and policy innovation, CSYGA empowers youth as active agents of change in today's complex international landscape.",
+        "buttons": [
+            {
+                "label": "Explore Programs",
+                "href": "/engagements",
+                "icon": "rocket_launch",
+                "primary": true
+            },
+            {
+                "label": "Join Our Movement",
+                "href": "/get-involved",
+                "icon": "group_add",
+                "primary": false
+            }
+        ],
+        "image": "/images/4.jpg"
+    },
+    "stats": [
+        {
+            "value": "50+",
+            "label": "Countries Represented",
+            "icon": "public"
+        },
+        {
+            "value": "500+",
+            "label": "Global Applications",
+            "icon": "description"
+        },
+        {
+            "value": "10+",
+            "label": "Strategic Partners",
+            "icon": "handshake"
+        }
+    ],
+    "quote": {
+        "text": "\"Young people don't just participate, they lead. Every program is designed to amplify youth voices in international strategy and diplomacy.\"",
+        "author": "CSYGA Youth Centric Approach"
+    },
+    "engagements": {
+        "title": "Our Focus",
+        "heading": "Our Engagements",
+        "description": "Discover our diverse range of programs designed to empower youth in the field of international diplomacy and global affairs.",
+        "items": [
+            {
+                "title": "Dynamic Engagements",
+                "description": "Interactive sessions where youth engage with policymakers, debate global issues, and develop actionable solutions for international challenges.",
+                "icon": "campaign",
+                "image": "/images/4.jpg",
+                "link": "/engagements#dynamic"
+            },
+            {
+                "title": "Diplomacy Simulations",
+                "description": "Realistic simulations of international organizations where participants negotiate agreements and resolve global conflicts through diplomatic channels.",
+                "icon": "handshake",
+                "image": "/diplomacySimulations.jpeg",
+                "link": "/engagements#simulations"
+            },
+            {
+                "title": "Workshops",
+                "description": "Skill-building sessions focused on negotiation techniques, cultural intelligence, policy analysis, and leadership development for aspiring diplomats.",
+                "icon": "school",
+                "image": "/images/1.jpg",
+                "link": "/engagements#workshops"
+            }
+        ]
+    },
+    "gallery": {
+        "title": "Highlights",
+        "heading": "Gallery",
+        "description": "Highlights from our past events and programs",
+        "images": [
+            {
+                "src": "/images/1.jpg",
+                "alt": "New Diplomacy Conference 2025 - Group Photo",
+                "title": "New Diplomacy Conference 2025",
+                "desc": "Delegates from 15+ countries",
+                "large": true
+            },
+            {
+                "src": "/images/2.jpg",
+                "alt": "Panel Discussion",
+                "title": "Expert Panel Discussion",
+                "desc": ""
+            },
+            {
+                "src": "/images/4.jpg",
+                "alt": "Global Security Panel",
+                "title": "Global Security & Conflict Resolution",
+                "desc": ""
+            },
+            {
+                "src": "/images/5.jpg",
+                "alt": "Interactive Session",
+                "title": "Interactive Q&A Session",
+                "desc": ""
+            },
+            {
+                "src": "/images/6.jpg",
+                "alt": "Delegate Engagement",
+                "title": "Delegate Engagement",
+                "desc": ""
+            },
+            {
+                "src": "/images/7.jpg",
+                "alt": "Networking Session",
+                "title": "Networking & Cultural Exchange",
+                "desc": ""
+            }
+        ]
+    },
+    "testimonials": {
+        "title": "Testimonials",
+        "heading": "What Our Delegates Say",
+        "description": "Hear from participants who attended our New Diplomacy Conference 2025",
+        "items": [
+            {
+                "quote": "The New Diplomacy Conference offered inspiring perspectives on youth, technology, and global cooperation. It was a valuable experience to be part of this environment.",
+                "author": "Isa Guluzade",
+                "country": "Azerbaijan",
+                "initials": "IG"
+            },
+            {
+                "quote": "I had a wonderful experience at the conference. It was truly diverse, engaging, and very helpful for my personal and professional growth. The sessions were well-organized, and the overall environment was motivating and inspiring.",
+                "author": "Meerab Niaz",
+                "country": "Pakistan",
+                "initials": "MN"
+            },
+            {
+                "quote": "It was a wonderful program for me and I learnt many things regarding the international system. Very well thought out event in terms of audience management, quality of the panelists, and socializing opportunities.",
+                "author": "Sakibou Salifou",
+                "country": "Benin",
+                "initials": "SS"
+            }
+        ]
+    }
+}

@@ -1,0 +1,60 @@
+{
+  "name": "CSYGA",
+  "logo": "/logo.png",
+  "navigation": [
+    {
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "label": "About Us",
+      "href": "/about"
+    },
+    {
+      "label": "Our Engagements",
+      "href": "/engagements",
+      "dropdown": [
+        {
+          "label": "Dynamic Engagements",
+          "href": "/engagements#dynamic",
+          "icon": "campaign"
+        },
+        {
+          "label": "Diplomacy Simulations",
+          "href": "/engagements#simulations",
+          "icon": "handshake"
+        },
+        {
+          "label": "Workshops",
+          "href": "/engagements#workshops",
+          "icon": "groups"
+        },
+        {
+          "label": "Cultural Diplomacy",
+          "href": "/engagements#cultural",
+          "icon": "public"
+        }
+      ]
+    },
+    {
+      "label": "Events",
+      "href": "/events"
+    },
+    {
+      "label": "Partners",
+      "href": "/partners"
+    },
+    {
+      "label": "Get Involved",
+      "href": "/get-involved"
+    },
+    {
+      "label": "Engage",
+      "href": "/engage"
+    }
+  ],
+  "ctaButton": {
+    "label": "Apply Now",
+    "href": "/apply"
+  }
+}

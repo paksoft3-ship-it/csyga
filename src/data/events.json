@@ -1,0 +1,56 @@
+{
+    "upcoming": [
+        {
+            "title": "Digital Diplomacy Summit 2025",
+            "date": "May 22-24, 2025",
+            "location": "Istanbul",
+            "description": "Join us for an immersive summit exploring digital diplomacy, AI in governance, and youth leadership in the digital age. Applications open until March 10th.",
+            "features": [
+                "3-Day Program",
+                "Includes official visits & city tour"
+            ],
+            "image": "/images/4.jpg",
+            "cta": "Register Now",
+            "link": "/apply",
+            "featured": true
+        }
+    ],
+    "past": [
+        {
+            "title": "New Diplomacy Conference 2025",
+            "month": "DEC",
+            "day": "06",
+            "location": "Istanbul",
+            "details": "25+ Delegates from 15+ Countries",
+            "icon": "groups",
+            "description": "A full-day forum on conflict resolution, multilateral cooperation, and youth-driven policy innovation."
+        },
+        {
+            "title": "Intercultural Communication in the Modern World",
+            "month": "NOV",
+            "day": "20",
+            "location": "Istanbul",
+            "details": "04:00 PM – 07:00 PM",
+            "icon": "schedule",
+            "description": "An interactive seminar exploring the dynamics of cross-cultural communication and international dialogue skills."
+        },
+        {
+            "title": "Borders and Brinkmanship: A New Pakistan-Türkiye Strategic Axis",
+            "month": "NOV",
+            "day": "05",
+            "location": "Taksim Mosque",
+            "details": "06:00 PM",
+            "icon": "schedule",
+            "description": "A policy forum on turning border crises into a stable Pakistan–Türkiye strategic axis."
+        },
+        {
+            "title": "The Role of Youth and Civil Society in Resolving Conflicts",
+            "month": "AUG",
+            "day": "04",
+            "location": "UDEF HQ",
+            "details": "06:00 PM",
+            "icon": "schedule",
+            "description": "A practicum where young leaders and CSOs shared hands-on tools for mediation and digital dialogue."
+        }
+    ]
+}

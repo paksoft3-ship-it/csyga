@@ -1,0 +1,125 @@
+{
+    "header": {
+        "title": "Our Engagements",
+        "badge": "Programs & Initiatives",
+        "description": "Discover our diverse range of programs designed to empower youth in the field of international diplomacy and global affairs.",
+        "bgImage": "/images/4.jpg"
+    },
+    "summitBanner": {
+        "badge": "Applications Open",
+        "title": "Digital Diplomacy Summit 2025",
+        "dateLocation": "May 22 - 24, 2025 | Istanbul",
+        "description": "Includes official visits to international organizations and city tour. Join emerging leaders from around the world for an immersive experience in digital diplomacy.",
+        "deadline": "Deadline: March 15, 2026",
+        "link": "/apply",
+        "image": "/images/4.jpg"
+    },
+    "dynamicEngagements": {
+        "title": "Dynamic Engagements",
+        "p1": "Our flagship program brings together young leaders, policymakers, and experts in interactive forums designed to tackle pressing global challenges. These engagements create spaces for meaningful dialogue and solution-building.",
+        "p2": "Participants engage in policy debates, develop position papers, and present recommendations to decision-makers at national and international levels.",
+        "bullets": [
+            "Youth Perspectives on Global Migration Policies",
+            "Innovating Humanitarian Response in Conflict Zones",
+            "Digital Rights and Cybersecurity Frameworks",
+            "Sustainable Development Goals Acceleration"
+        ],
+        "linkText": "Apply for Digital Diplomacy Summit",
+        "image": "/images/4.jpg",
+        "relatedEvents": [
+            {
+                "title": "New Diplomacy Conference 2025 (Dec 6)",
+                "link": "/events#panel-past"
+            },
+            {
+                "title": "Borders & Brinkmanship Forum (Nov 5)",
+                "link": "/events#panel-past"
+            }
+        ]
+    },
+    "diplomacySimulations": {
+        "title": "Diplomacy Simulations",
+        "p1": "Experience the complexities of international relations through our realistic diplomatic simulations. Participants assume roles as country delegates, NGO representatives, or international organization officials to negotiate solutions to global challenges.",
+        "p2": "Our simulations recreate environments such as:",
+        "bullets": [
+            "United Nations General Assembly sessions",
+            "Security Council emergency meetings",
+            "Climate Change COPs",
+            "World Trade Organization negotiations"
+        ],
+        "linkText": "Apply for Digital Diplomacy Summit",
+        "image": "/images/6.jpg",
+        "relatedEvents": [
+            {
+                "title": "Youth & Civil Society in Resolving Conflicts (Aug 4)",
+                "link": "/events#panel-past"
+            }
+        ]
+    },
+    "workshops": {
+        "title": "Workshops & Training",
+        "description": "Develop essential diplomatic skills through our specialized workshops led by experienced practitioners. Our practical training sessions equip participants with tools for effective international engagement.",
+        "cards": [
+            {
+                "icon": "chat",
+                "title": "Negotiation Skills",
+                "desc": "Master the art of diplomatic negotiation.",
+                "color": "text-primary",
+                "bg": "bg-blue-100"
+            },
+            {
+                "icon": "public",
+                "title": "Cultural Intelligence",
+                "desc": "Cross-cultural communication skills.",
+                "color": "text-accent",
+                "bg": "bg-accent/10"
+            },
+            {
+                "icon": "description",
+                "title": "Policy Analysis",
+                "desc": "Evidence-based recommendations.",
+                "color": "text-purple-600",
+                "bg": "bg-purple-100"
+            },
+            {
+                "icon": "campaign",
+                "title": "Public Diplomacy",
+                "desc": "Effective advocacy strategies.",
+                "color": "text-amber-600",
+                "bg": "bg-amber-100"
+            }
+        ],
+        "linkText": "Apply for Digital Diplomacy Summit",
+        "image": "/images/1.jpg",
+        "relatedEvents": [
+            {
+                "title": "Intercultural Communication in the Modern World (Nov 20)",
+                "link": "/events#panel-past"
+            }
+        ]
+    },
+    "culturalDiplomacy": {
+        "title": "Cultural Diplomacy",
+        "p1": "Bridge cultural divides and build mutual understanding through our cultural diplomacy initiatives. These programs use arts, language, cuisine, and shared experiences to foster connections between young leaders from diverse backgrounds.",
+        "p2": "Our cultural diplomacy activities include:",
+        "bullets": [
+            "International cultural festivals showcasing traditions",
+            "Language exchange programs",
+            "Artistic collaborations addressing global themes",
+            "Culinary diplomacy events",
+            "Digital storytelling projects"
+        ],
+        "linkText": "Apply for Digital Diplomacy Summit",
+        "image": "/images/5.jpg",
+        "relatedEvents": [
+            {
+                "title": "New Diplomacy Conference 2025 (Dec 6)",
+                "link": "/events#panel-past"
+            },
+            {
+                "title": "Intercultural Communication in the Modern World (Nov 20)",
+                "link": "/events#panel-past"
+            }
+        ]
+    }
+}

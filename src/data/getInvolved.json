@@ -1,0 +1,115 @@
+{
+    "getInvolved": {
+        "header": {
+            "title": "Join Our Global Movement",
+            "description": "Discover opportunities to contribute your talents, develop new skills, and make an impact on the world stage.",
+            "bgImage": "/images/4.jpg"
+        },
+        "opportunities": {
+            "title": "Opportunities for Engagement",
+            "subtitle": "Whether you're a student, young professional, or established expert, there are multiple ways to get involved",
+            "items": [
+                {
+                    "type": "featured",
+                    "title": "Youth Delegate Program",
+                    "description": "Join our flagship program for young leaders aged 18-30. Participate in international conferences, diplomatic simulations, and policy development processes.",
+                    "icon": "school",
+                    "image": "/images/4.jpg",
+                    "bullets": [
+                        "Mentorship from senior diplomats",
+                        "Access to global networks",
+                        "Leadership development training"
+                    ],
+                    "cta": "Explore Digital Diplomacy Summit",
+                    "ctaLink": "/engagements#dynamic"
+                },
+                {
+                    "type": "card",
+                    "title": "Volunteer Opportunities",
+                    "description": "Contribute your skills to support our programs and operations. Volunteers play crucial roles in event organization, communications, research, and more.",
+                    "icon": "volunteer_activism",
+                    "image": "/images/6.jpg",
+                    "bullets": [
+                        "Flexible time commitments",
+                        "Skill-based placements",
+                        "Remote and in-person options",
+                        "Professional development"
+                    ],
+                    "cta": "Apply Now",
+                    "ctaLink": "https://docs.google.com/forms/d/e/1FAIpQLSeSW3Ws_9vqMHc3dCGtVtRi6eYTWoW4n-yRHCEEFyeksg4WxA/viewform"
+                },
+                {
+                    "type": "wide-card",
+                    "title": "Mentorship Program",
+                    "description": "Share your expertise with the next generation of diplomatic leaders. Our mentors guide youth participants through their professional development journey.",
+                    "icon": "supervised_user_circle",
+                    "image": "/images/2.jpg",
+                    "bullets": [
+                        "Quarterly mentorship cycles",
+                        "Structured guidance framework",
+                        "Networking with fellow experts",
+                        "Impact measurement"
+                    ],
+                    "cta": "Apply to Become a Mentor",
+                    "ctaLink": "#mentor-form"
+                }
+            ]
+        },
+        "mentorForm": {
+            "title": "Become a Mentor",
+            "subtitle": "Share your expertise with emerging diplomatic leaders. Fill out the form below and our team will reach out to discuss mentorship opportunities."
+        }
+    },
+    "engage": {
+        "header": {
+            "title": "Connect With Us",
+            "description": "Reach out to collaborate, ask questions, or learn more about our initiatives. We're here to engage with you.",
+            "bgImage": "/images/4.jpg"
+        },
+        "contact": {
+            "title": "Get In Touch",
+            "subtitle": "Have questions about our programs? Interested in partnership opportunities? Want to explore collaboration? We'd love to hear from you.",
+            "email": "thecsyga@gmail.com",
+            "phone": "+90 501 599 05 66",
+            "address": "Mehmet Akif Mahallesi\n1. Muammer Aksoy Cad\nBina 36, Daire 5\nKucukcekmece, Istanbul"
+        },
+        "social": {
+            "title": "Connect on Social Media",
+            "subtitle": "Join our global community and stay updated with the latest news and events",
+            "networks": [
+                {
+                    "name": "Instagram",
+                    "description": "Follow us for behind-the-scenes moments, event highlights, and youth stories.",
+                    "url": "https://www.instagram.com/thecsyga/",
+                    "iconClass": "fab fa-instagram",
+                    "bgGradient": "bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400",
+                    "btnText": "Follow @thecsyga"
+                },
+                {
+                    "name": "LinkedIn",
+                    "description": "Connect professionally and explore career opportunities in global affairs.",
+                    "url": "https://www.linkedin.com/company/center-for-strategic-youth-global-affairs/",
+                    "iconClass": "fab fa-linkedin-in",
+                    "bgGradient": "bg-[#0077B5]",
+                    "btnText": "Connect With Us"
+                },
+                {
+                    "name": "X (Twitter)",
+                    "description": "Join conversations on global issues and stay updated with real-time news.",
+                    "url": "https://x.com/thecsyga",
+                    "iconClass": "fab fa-x-twitter",
+                    "bgGradient": "bg-black",
+                    "btnText": "Follow @thecsyga"
+                },
+                {
+                    "name": "Facebook",
+                    "description": "Join our community for updates, discussions, and event announcements.",
+                    "url": "https://www.facebook.com/thecsyga",
+                    "iconClass": "fab fa-facebook-f",
+                    "bgGradient": "bg-[#1877F2]",
+                    "btnText": "Follow Us"
+                }
+            ]
+        }
+    }
+}

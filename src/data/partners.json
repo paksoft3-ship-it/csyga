@@ -1,0 +1,69 @@
+{
+    "header": {
+        "title": "Our Strategic Partners",
+        "description": "Collaboration is at the heart of our mission. Discover the organizations that join us in empowering youth for global impact.",
+        "bgImage": "/images/4.jpg"
+    },
+    "network": {
+        "title": "Global Network of Partners",
+        "description": "We collaborate with leading international organizations, academic institutions, and diplomatic missions to create meaningful opportunities for youth engagement in global affairs.",
+        "logos": [
+            {
+                "name": "Bab-e-Alem",
+                "src": "/bab.jpeg"
+            },
+            {
+                "name": "Tugva",
+                "src": "/tugva.png"
+            },
+            {
+                "name": "Udef",
+                "src": "/udef.png"
+            },
+            {
+                "name": "TISUP",
+                "src": "/tisup.png"
+            },
+            {
+                "name": "Ababeel Group",
+                "src": "/Ababeel.png"
+            }
+        ]
+    },
+    "opportunities": {
+        "title": "Partnership Opportunities",
+        "description": "Join our global network and collaborate to empower the next generation of diplomatic leaders",
+        "cta": "Become a Partner",
+        "ctaLink": "/engage#contact",
+        "items": [
+            {
+                "title": "Program Collaboration",
+                "description": "Co-create youth engagement programs that align with your organization's mission and expertise.",
+                "icon": "volunteer_activism",
+                "badge": "New Diplomacy Conference",
+                "image": "/NewDeplomacyConference.jpeg"
+            },
+            {
+                "title": "Talent Pipeline",
+                "description": "Access our global network of talented youth for internships, fellowships, and employment opportunities.",
+                "icon": "school",
+                "badge": "Dynamic Exchange",
+                "image": "/DynamicExchange.jpeg"
+            },
+            {
+                "title": "Thought Leadership",
+                "description": "Participate in our high-level forums and contribute to shaping the future of youth diplomacy.",
+                "icon": "campaign",
+                "badge": "Borders & Brinkmanship Forum",
+                "image": "/BordersAndBrinkManship.jpeg"
+            },
+            {
+                "title": "Global Reach",
+                "description": "Expand your organization's impact through our network of youth ambassadors in 50+ countries.",
+                "icon": "public",
+                "badge": "Youth & Civil Society",
+                "image": "/YouthAndCivilSocity.jpeg"
+            }
+        ]
+    }
+}

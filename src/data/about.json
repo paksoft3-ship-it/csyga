@@ -1,0 +1,130 @@
+{
+    "header": {
+        "title": "Bridging the Gap Between Youth Leadership and Global Governance",
+        "badge": "About CSYGA",
+        "description": "The Centre for Strategic Youth and Global Affairs (CSYGA) is an international think tank and leadership incubator dedicated to empowering the next generation of diplomatic leaders.",
+        "bgImage": "/images/1.jpg"
+    },
+    "missionVision": {
+        "mission": {
+            "title": "Our Mission",
+            "p1": "To provide young leaders with the strategic tools, diplomatic training, and institutional access required to navigate and influence the complexities of modern global affairs.",
+            "p2": "Through innovative programs and strategic partnerships, we create platforms for meaningful youth participation in diplomatic processes, policy development, and cross-cultural dialogue."
+        },
+        "vision": {
+            "title": "Our Vision",
+            "p1": "To build a sustainable global ecosystem where youth-driven diplomacy, ethical technology, and humanitarian action create a more secure and inclusive world.",
+            "p2": "By 2030, we aim to establish a global network of 10,000 youth diplomats actively engaged in shaping international policy across all continents."
+        }
+    },
+    "corePillars": {
+        "title": "Our Foundation",
+        "heading": "Our Core Pillars",
+        "description": "The foundational principles that guide our work and programs",
+        "items": [
+            {
+                "icon": "handshake",
+                "title": "Youth-Driven Diplomacy",
+                "description": "Creating high-level platforms for young professionals to engage directly with state actors and international organizations.",
+                "gradient": "from-blue-600 to-blue-400",
+                "textColor": "text-blue-600"
+            },
+            {
+                "icon": "memory",
+                "title": "Ethical Technology",
+                "description": "Promoting the responsible use of digital tools and AI in peacebuilding and public discourse.",
+                "gradient": "from-purple-600 to-pink-400",
+                "textColor": "text-purple-600"
+            },
+            {
+                "icon": "volunteer_activism",
+                "title": "Humanitarian Action",
+                "description": "Strengthening the role of youth in crisis response, advocacy, and international cooperation.",
+                "gradient": "from-green-500 to-emerald-400",
+                "textColor": "text-green-600"
+            },
+            {
+                "icon": "school",
+                "title": "Leadership Development",
+                "description": "Equipping future policymakers with technical skills in negotiation, policy analysis, and strategic communication.",
+                "gradient": "from-amber-500 to-orange-400",
+                "textColor": "text-amber-500"
+            }
+        ]
+    },
+    "whyCsyga": {
+        "title": "Our Difference",
+        "heading": "Why CSYGA?",
+        "description": "What sets us apart in youth diplomatic engagement",
+        "items": [
+            {
+                "icon": "military_tech",
+                "title": "Proven Track Record",
+                "description": "Our initiatives have engaged hundreds of participants from over 50 countries, creating a truly global network of emerging leaders.",
+                "bgColor": "bg-primary/10",
+                "textColor": "text-primary",
+                "hoverBorder": "hover:border-primary/20"
+            },
+            {
+                "icon": "location_city",
+                "title": "Institutional Access",
+                "description": "Based in the diplomatic hub of Istanbul, we facilitate direct engagement with consulates, municipal governments, and international NGOs.",
+                "bgColor": "bg-accent/10",
+                "textColor": "text-accent",
+                "hoverBorder": "hover:border-accent/20"
+            },
+            {
+                "icon": "strategy",
+                "title": "Strategic Impact",
+                "description": "We don't just host events; we produce policy recommendations and simulations that prepare youth for real-world diplomatic challenges.",
+                "bgColor": "bg-purple-100",
+                "textColor": "text-purple-600",
+                "hoverBorder": "hover:border-purple-200"
+            }
+        ]
+    },
+    "globalFootprint": {
+        "title": "Our Global Footprint",
+        "description": "Key metrics from our journey so far",
+        "metrics": [
+            {
+                "value": "50+",
+                "label": "Countries Represented"
+            },
+            {
+                "value": "1000+",
+                "label": "Network Members"
+            },
+            {
+                "value": "10+",
+                "label": "Institutional Partners"
+            },
+            {
+                "value": "20+",
+                "label": "Diplomatic Simulations"
+            }
+        ]
+    },
+    "eventHighlights": {
+        "title": "Past Programs",
+        "heading": "Event Highlights",
+        "description": "A glimpse into our past programs and achievements",
+        "items": [
+            {
+                "image": "/images/1.jpg",
+                "title": "New Diplomacy Conference 2025",
+                "description": "25+ delegates from 15+ countries explored conflict resolution and youth-driven policy innovation."
+            },
+            {
+                "image": "/images/2.jpg",
+                "title": "Borders and Brinkmanship Forum",
+                "description": "Policy discussions on Pakistan-Türkiye strategic axis with defense and economy experts."
+            },
+            {
+                "image": "/images/5.jpg",
+                "title": "Youth & Civil Society Workshop",
+                "description": "Hands-on training in mediation, digital dialogue, and community action planning."
+            }
+        ]
+    }
+}
