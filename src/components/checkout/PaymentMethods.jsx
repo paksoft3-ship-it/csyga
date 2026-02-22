@@ -11,6 +11,8 @@ export default function PaymentMethods() {
         { id: "bank", name: "Bank Transfer", icon: "account_balance" }
     ];
 
+
+
     const handlePaymentSubmit = (e) => {
         e.preventDefault();
         alert(`Processing payment via ${selectedMethod}... \n(Mock Submission Successful)`);
@@ -27,8 +29,8 @@ export default function PaymentMethods() {
                         key={method.id}
                         onClick={() => setSelectedMethod(method.id)}
                         className={`flex flex-col items-center justify-center p-6 border-2 rounded-2xl transition-all duration-200 ${selectedMethod === method.id
-                                ? "border-primary bg-primary/5 text-primary shadow-md"
-                                : "border-gray-200 bg-white text-gray-500 hover:border-primary/50 hover:bg-gray-50"
+                            ? "border-primary bg-primary/5 text-primary shadow-md"
+                            : "border-gray-200 bg-white text-gray-500 hover:border-primary/50 hover:bg-gray-50"
                             }`}
                     >
                         <span className={`material-symbols-outlined text-4xl mb-3 ${selectedMethod === method.id ? "text-primary" : "text-gray-400"}`}>
