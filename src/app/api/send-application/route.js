@@ -17,18 +17,32 @@ const SHEET_HEADERS = [
     "Organizations",
     "Social Causes",
     "Statement of Purpose",
-    "Headshot (Drive Link)",
-    "Resume (Drive Link)",
+    "Headshot Attached",
+    "Resume Attached",
 ];
+
+// ─── Gmail transporter ────────────────────────────────────────────────────────
+function getTransporter() {
+    return nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            user: process.env.GMAIL_USER,
+            pass: process.env.GMAIL_APP_PASSWORD,
+        },
+    });
+}
+
+// ─── Google Sheets (optional – only runs if service account is configured) ────
+function isGoogleConfigured() {
+    const email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || "";
+    return email && !email.includes("your-service-account");
+}
 
 function getGoogleAuth() {
     return new google.auth.JWT({
         email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
         key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-        scopes: [
-            "https://www.googleapis.com/auth/spreadsheets",
-            "https://www.googleapis.com/auth/drive.file",
-        ],
+        scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
 }
 
@@ -48,32 +62,9 @@ async function ensureHeaders(sheets, sheetId) {
     }
 }
 
-async function uploadToDrive(drive, file, folderId) {
-    const buffer = await file.arrayBuffer();
-    const stream = Readable.from(Buffer.from(buffer));
-
-    const response = await drive.files.create({
-        requestBody: {
-            name: file.name,
-            parents: [folderId],
-        },
-        media: {
-            mimeType: file.type || "application/octet-stream",
-            body: stream,
-        },
-        fields: "id, webViewLink",
-    });
-
-    // Make file readable by anyone with the link
-    await drive.permissions.create({
-        fileId: response.data.id,
-        requestBody: { role: "reader", type: "anyone" },
-    });
-
-    return response.data.webViewLink;
-}
-
-async function appendToSheet(sheets, sheetId, row) {
+async function appendToSheet(auth, sheetId, row) {
+    const sheets = google.sheets({ version: "v4", auth });
+    await ensureHeaders(sheets, sheetId);
     await sheets.spreadsheets.values.append({
         spreadsheetId: sheetId,
         range: "Sheet1!A:P",
@@ -82,126 +73,124 @@ async function appendToSheet(sheets, sheetId, row) {
     });
 }
 
-async function sendNotification(name, email, sheetId) {
-    const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-            user: process.env.GMAIL_USER,
-            pass: process.env.GMAIL_APP_PASSWORD,
-        },
-    });
-
-    const sheetUrl = `https://docs.google.com/spreadsheets/d/${sheetId}`;
-
-    await transporter.sendMail({
-        from: `"CSYGA Applications" <${process.env.GMAIL_USER}>`,
-        to: process.env.GMAIL_USER,
-        subject: `New Application – ${name}`,
-        html: `
-            <div style="font-family: Arial, sans-serif; max-width: 500px;">
-                <div style="background: #195eb3; padding: 20px 28px; border-radius: 8px 8px 0 0;">
-                    <h2 style="color: #fff; margin: 0;">New Application Received</h2>
-                </div>
-                <div style="border: 1px solid #e0e0e0; border-top: none; padding: 24px; border-radius: 0 0 8px 8px;">
-                    <p style="margin: 0 0 8px;"><strong>Name:</strong> ${name}</p>
-                    <p style="margin: 0 0 20px;"><strong>Email:</strong> ${email}</p>
-                    <a href="${sheetUrl}"
-                       style="background: #2ec27e; color: #fff; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: bold; display: inline-block;">
-                        View All Applications →
-                    </a>
-                    <p style="color: #888; font-size: 12px; margin-top: 20px;">
-                        Files (headshot & resume) are saved in your Google Drive folder.
-                    </p>
-                </div>
-            </div>
-        `,
-    });
-}
-
+// ─── Main handler ─────────────────────────────────────────────────────────────
 export async function POST(request) {
     const errors = [];
 
     try {
         const formData = await request.formData();
 
-        const name              = formData.get("name")              || "";
-        const email             = formData.get("email")             || "";
-        const phone             = formData.get("phone")             || "";
-        const city              = formData.get("city")              || "";
-        const nationality       = formData.get("nationality")       || "";
-        const passportNumber    = formData.get("passportNumber")    || "";
-        const dob               = formData.get("dob")               || "";
-        const gender            = formData.get("gender")            || "";
-        const isStudent         = formData.get("isStudent")         || "";
-        const hasVolunteerExp   = formData.get("hasVolunteerExp")   || "";
-        const organizations     = formData.get("organizations")     || "";
+        const name               = formData.get("name")               || "";
+        const email              = formData.get("email")              || "";
+        const phone              = formData.get("phone")              || "";
+        const city               = formData.get("city")               || "";
+        const nationality        = formData.get("nationality")        || "";
+        const passportNumber     = formData.get("passportNumber")     || "";
+        const dob                = formData.get("dob")                || "";
+        const gender             = formData.get("gender")             || "";
+        const isStudent          = formData.get("isStudent")          || "";
+        const hasVolunteerExp    = formData.get("hasVolunteerExp")    || "";
+        const organizations      = formData.get("organizations")      || "";
         const statementOfPurpose = formData.get("statementOfPurpose") || "";
-        const socialCauses      = formData.get("socialCauses")      || "";
-        const headshot          = formData.get("headshot");
-        const resume            = formData.get("resume");
+        const socialCauses       = formData.get("socialCauses")       || "";
+        const headshot           = formData.get("headshot");
+        const resume             = formData.get("resume");
 
-        const auth  = getGoogleAuth();
-        const drive = google.drive({ version: "v3", auth });
-        const sheets = google.sheets({ version: "v4", auth });
-
-        const sheetId   = process.env.GOOGLE_SHEET_ID;
-        const folderId  = process.env.GOOGLE_DRIVE_FOLDER_ID;
-
-        // Upload files to Google Drive
-        let headshotLink = "";
-        let resumeLink   = "";
+        // Build email attachments from uploaded files
+        const attachments = [];
 
         if (headshot && headshot.size > 0) {
-            try {
-                headshotLink = await uploadToDrive(drive, headshot, folderId);
-            } catch (err) {
-                errors.push("Headshot upload failed: " + err.message);
-            }
+            const buffer = await headshot.arrayBuffer();
+            attachments.push({
+                filename: headshot.name,
+                content: Buffer.from(buffer),
+                contentType: headshot.type || "application/octet-stream",
+            });
         }
 
         if (resume && resume.size > 0) {
-            try {
-                resumeLink = await uploadToDrive(drive, resume, folderId);
-            } catch (err) {
-                errors.push("Resume upload failed: " + err.message);
-            }
+            const buffer = await resume.arrayBuffer();
+            attachments.push({
+                filename: resume.name,
+                content: Buffer.from(buffer),
+                contentType: resume.type || "application/octet-stream",
+            });
         }
 
-        // Append row to Google Sheets
-        const timestamp = new Date().toLocaleString("en-GB", { timeZone: "UTC" }) + " UTC";
-        const row = [
-            timestamp,
-            name,
-            email,
-            phone,
-            city,
-            nationality,
-            passportNumber,
-            dob,
-            gender,
-            isStudent,
-            hasVolunteerExp,
-            organizations,
-            socialCauses,
-            statementOfPurpose,
-            headshotLink,
-            resumeLink,
-        ];
-
+        // Send full application email with files attached
         try {
-            await ensureHeaders(sheets, sheetId);
-            await appendToSheet(sheets, sheetId, row);
-        } catch (err) {
-            errors.push("Sheets append failed: " + err.message);
-            console.error("Sheets error:", err);
-        }
+            const transporter = getTransporter();
+            await transporter.sendMail({
+                from: `"CSYGA Applications" <${process.env.GMAIL_USER}>`,
+                to: process.env.GMAIL_USER,
+                replyTo: email,
+                subject: `New Application – ${name}`,
+                html: `
+                    <div style="font-family: Arial, sans-serif; max-width: 700px; margin: 0 auto; color: #111;">
+                        <div style="background: #195eb3; padding: 24px 32px; border-radius: 8px 8px 0 0;">
+                            <h1 style="color: #fff; margin: 0; font-size: 22px;">New Application Received</h1>
+                        </div>
+                        <div style="border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 8px 8px; padding: 32px;">
 
-        // Send Gmail notification
-        try {
-            await sendNotification(name, email, sheetId);
+                            <h2 style="color: #195eb3; margin-top: 0;">Personal Information</h2>
+                            <table style="width:100%; border-collapse:collapse;">
+                                <tr><td style="padding:8px 0;font-weight:bold;width:200px;">Full Name</td><td style="padding:8px 0;">${name}</td></tr>
+                                <tr style="background:#f6f7f8;"><td style="padding:8px 4px;font-weight:bold;">Email</td><td style="padding:8px 4px;">${email}</td></tr>
+                                <tr><td style="padding:8px 0;font-weight:bold;">Phone</td><td style="padding:8px 0;">${phone}</td></tr>
+                                <tr style="background:#f6f7f8;"><td style="padding:8px 4px;font-weight:bold;">City</td><td style="padding:8px 4px;">${city}</td></tr>
+                                <tr><td style="padding:8px 0;font-weight:bold;">Nationality</td><td style="padding:8px 0;">${nationality}</td></tr>
+                                <tr style="background:#f6f7f8;"><td style="padding:8px 4px;font-weight:bold;">Passport / ID No.</td><td style="padding:8px 4px;">${passportNumber}</td></tr>
+                                <tr><td style="padding:8px 0;font-weight:bold;">Date of Birth</td><td style="padding:8px 0;">${dob}</td></tr>
+                                <tr style="background:#f6f7f8;"><td style="padding:8px 4px;font-weight:bold;">Gender</td><td style="padding:8px 4px;">${gender}</td></tr>
+                            </table>
+
+                            <h2 style="color: #195eb3; margin-top: 28px;">Journey & Impact</h2>
+                            <table style="width:100%; border-collapse:collapse;">
+                                <tr><td style="padding:8px 0;font-weight:bold;width:200px;">Currently a Student?</td><td style="padding:8px 0;">${isStudent}</td></tr>
+                                <tr style="background:#f6f7f8;"><td style="padding:8px 4px;font-weight:bold;">Volunteer Experience?</td><td style="padding:8px 4px;">${hasVolunteerExp}</td></tr>
+                                ${organizations ? `<tr><td style="padding:8px 0;font-weight:bold;">Organizations</td><td style="padding:8px 0;">${organizations}</td></tr>` : ""}
+                                <tr style="background:#f6f7f8;"><td style="padding:8px 4px;font-weight:bold;vertical-align:top;">Social Causes</td><td style="padding:8px 4px;">${socialCauses}</td></tr>
+                            </table>
+
+                            <h2 style="color: #195eb3; margin-top: 28px;">Statement of Purpose</h2>
+                            <p style="background:#f6f7f8;padding:16px;border-radius:6px;line-height:1.6;">${statementOfPurpose}</p>
+
+                            ${attachments.length > 0
+                                ? `<p style="color:#555;margin-top:16px;">
+                                    <strong>Attached files (${attachments.length}):</strong>
+                                    ${attachments.map(a => a.filename).join(", ")}
+                                   </p>`
+                                : `<p style="color:#999;margin-top:16px;">No files attached.</p>`
+                            }
+
+                            <hr style="border:none;border-top:1px solid #e0e0e0;margin:28px 0;" />
+                            <p style="color:#888;font-size:13px;">Automatically generated from the CSYGA application form.</p>
+                        </div>
+                    </div>
+                `,
+                attachments,
+            });
         } catch (err) {
-            errors.push("Gmail notification failed: " + err.message);
+            errors.push("Email send failed: " + err.message);
             console.error("Gmail error:", err);
+        }
+
+        // Save to Google Sheets (only if service account is configured)
+        if (isGoogleConfigured()) {
+            try {
+                const auth = getGoogleAuth();
+                const timestamp = new Date().toLocaleString("en-GB", { timeZone: "UTC" }) + " UTC";
+                await appendToSheet(auth, process.env.GOOGLE_SHEET_ID, [
+                    timestamp, name, email, phone, city, nationality,
+                    passportNumber, dob, gender, isStudent, hasVolunteerExp,
+                    organizations, socialCauses, statementOfPurpose,
+                    headshot?.size > 0 ? "Yes" : "No",
+                    resume?.size > 0 ? "Yes" : "No",
+                ]);
+            } catch (err) {
+                errors.push("Sheets append failed: " + err.message);
+                console.error("Sheets error:", err);
+            }
         }
 
         return Response.json({ success: true, errors });
