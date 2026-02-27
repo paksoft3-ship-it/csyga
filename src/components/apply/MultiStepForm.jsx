@@ -43,14 +43,47 @@ export default function MultiStepForm() {
         setFormData((prev) => ({ ...prev, [field]: value }));
     };
 
-    const handleSubmit = (e) => {
+    const [submitting, setSubmitting] = useState(false);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!formData.agreeTerms) {
             alert("You must agree to the Terms and Conditions to submit.");
             return;
         }
-        // Open Revolut checkout link in the same tab
-        window.location.href = "https://checkout.revolut.com/payment-link/39be6362-9836-4069-b627-3c8c3af46832";
+
+        setSubmitting(true);
+
+        try {
+            // Build FormData so files are included as attachments
+            const payload = new FormData();
+            payload.append("name", formData.name);
+            payload.append("email", formData.email);
+            payload.append("phone", formData.phone);
+            payload.append("city", formData.city);
+            payload.append("nationality", formData.nationality);
+            payload.append("passportNumber", formData.passportNumber);
+            payload.append("dob", formData.dob);
+            payload.append("gender", formData.gender);
+            payload.append("isStudent", formData.isStudent);
+            payload.append("hasVolunteerExp", formData.hasVolunteerExp);
+            payload.append("organizations", formData.organizations);
+            payload.append("statementOfPurpose", formData.statementOfPurpose);
+            payload.append("socialCauses", formData.socialCauses.join(", "));
+            if (formData.headshot) payload.append("headshot", formData.headshot);
+            if (formData.resume) payload.append("resume", formData.resume);
+
+            await fetch("/api/send-application", {
+                method: "POST",
+                body: payload,
+            });
+        } catch (err) {
+            console.error("Failed to send application email:", err);
+        } finally {
+            setSubmitting(false);
+            // Redirect to Revolut checkout regardless
+            window.location.href = "https://checkout.revolut.com/payment-link/39be6362-9836-4069-b627-3c8c3af46832";
+        }
     };
 
     return (
@@ -65,7 +98,7 @@ export default function MultiStepForm() {
                     <Step2Journey formData={formData} updateFormData={updateFormData} nextStep={nextStep} prevStep={prevStep} />
                 )}
                 {currentStep === 3 && (
-                    <Step3Terms formData={formData} updateFormData={updateFormData} prevStep={prevStep} handleSubmit={handleSubmit} />
+                    <Step3Terms formData={formData} updateFormData={updateFormData} prevStep={prevStep} handleSubmit={handleSubmit} submitting={submitting} />
                 )}
             </form>
         </div>

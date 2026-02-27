@@ -1,4 +1,4 @@
-export default function Step3Terms({ formData, updateFormData, prevStep, handleSubmit }) {
+export default function Step3Terms({ formData, updateFormData, prevStep, handleSubmit, submitting }) {
     return (
         <div className="space-y-8 animate-fade-in">
             <div>
@@ -67,11 +67,11 @@ export default function Step3Terms({ formData, updateFormData, prevStep, handleS
                 <button
                     type="submit"
                     onClick={handleSubmit}
-                    className={`px-8 py-3 rounded-full font-bold transition shadow-md flex items-center gap-2 ${formData.agreeTerms ? 'bg-accent hover:bg-accent/90 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
-                    disabled={!formData.agreeTerms}
+                    className={`px-8 py-3 rounded-full font-bold transition shadow-md flex items-center gap-2 ${formData.agreeTerms && !submitting ? 'bg-accent hover:bg-accent/90 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+                    disabled={!formData.agreeTerms || submitting}
                 >
-                    Proceed to Checkout
-                    <span className="material-symbols-outlined">send</span>
+                    {submitting ? "Submitting..." : "Proceed to Checkout"}
+                    <span className="material-symbols-outlined">{submitting ? "hourglass_empty" : "send"}</span>
                 </button>
             </div>
         </div>
