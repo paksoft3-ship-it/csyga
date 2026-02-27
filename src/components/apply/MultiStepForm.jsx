@@ -81,8 +81,7 @@ export default function MultiStepForm() {
             console.error("Failed to send application email:", err);
         } finally {
             setSubmitting(false);
-            // Redirect to Revolut checkout regardless
-            window.location.href = "https://checkout.revolut.com/payment-link/39be6362-9836-4069-b627-3c8c3af46832";
+            router.push("/apply/success");
         }
     };
 

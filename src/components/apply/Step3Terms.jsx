@@ -70,7 +70,7 @@ export default function Step3Terms({ formData, updateFormData, prevStep, handleS
                     className={`px-8 py-3 rounded-full font-bold transition shadow-md flex items-center gap-2 ${formData.agreeTerms && !submitting ? 'bg-accent hover:bg-accent/90 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
                     disabled={!formData.agreeTerms || submitting}
                 >
-                    {submitting ? "Submitting..." : "Proceed to Checkout"}
+                    {submitting ? "Submitting..." : "Submit Application"}
                     <span className="material-symbols-outlined">{submitting ? "hourglass_empty" : "send"}</span>
                 </button>
             </div>
