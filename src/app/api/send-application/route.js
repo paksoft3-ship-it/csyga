@@ -117,9 +117,18 @@ export async function POST(request) {
             });
         }
 
+        // Guard: Gmail credentials must be set
+        if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+            return Response.json(
+                { success: false, error: "Email service is not configured. Please contact the administrator." },
+                { status: 500 }
+            );
+        }
+
         // Send full application email with files attached
         try {
             const transporter = getTransporter();
+            await transporter.verify(); // confirm credentials work before sending
             await transporter.sendMail({
                 from: `"CSYGA Applications" <${process.env.GMAIL_USER}>`,
                 to: process.env.GMAIL_USER,
@@ -171,8 +180,11 @@ export async function POST(request) {
                 attachments,
             });
         } catch (err) {
-            errors.push("Email send failed: " + err.message);
             console.error("Gmail error:", err);
+            return Response.json(
+                { success: false, error: "Failed to send email: " + err.message },
+                { status: 500 }
+            );
         }
 
         // Save to Google Sheets (only if service account is configured)

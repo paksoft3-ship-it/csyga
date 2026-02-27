@@ -1,4 +1,4 @@
-export default function Step3Terms({ formData, updateFormData, prevStep, handleSubmit, submitting }) {
+export default function Step3Terms({ formData, updateFormData, prevStep, handleSubmit, submitting, submitError }) {
     return (
         <div className="space-y-8 animate-fade-in">
             <div>
@@ -55,6 +55,13 @@ export default function Step3Terms({ formData, updateFormData, prevStep, handleS
                     </label>
                 </div>
             </div>
+
+            {submitError && (
+                <div className="mt-6 flex items-start gap-3 bg-red-50 border border-red-200 text-red-700 rounded-xl px-5 py-4 text-sm">
+                    <span className="material-symbols-outlined text-[18px] mt-0.5 shrink-0">error</span>
+                    <span>{submitError}</span>
+                </div>
+            )}
 
             <div className="flex justify-between pt-6 border-t border-gray-100">
                 <button

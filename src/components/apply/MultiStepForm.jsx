@@ -44,6 +44,7 @@ export default function MultiStepForm() {
     };
 
     const [submitting, setSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -53,9 +54,9 @@ export default function MultiStepForm() {
         }
 
         setSubmitting(true);
+        setSubmitError("");
 
         try {
-            // Build FormData so files are included as attachments
             const payload = new FormData();
             payload.append("name", formData.name);
             payload.append("email", formData.email);
@@ -73,15 +74,24 @@ export default function MultiStepForm() {
             if (formData.headshot) payload.append("headshot", formData.headshot);
             if (formData.resume) payload.append("resume", formData.resume);
 
-            await fetch("/api/send-application", {
+            const res = await fetch("/api/send-application", {
                 method: "POST",
                 body: payload,
             });
+
+            const data = await res.json();
+
+            if (!res.ok || data.success === false) {
+                setSubmitError(data.error || "Submission failed. Please try again.");
+                return;
+            }
+
+            router.push("/apply/success");
         } catch (err) {
-            console.error("Failed to send application email:", err);
+            console.error("Submission error:", err);
+            setSubmitError("Network error. Please check your connection and try again.");
         } finally {
             setSubmitting(false);
-            router.push("/apply/success");
         }
     };
 
@@ -97,7 +107,7 @@ export default function MultiStepForm() {
                     <Step2Journey formData={formData} updateFormData={updateFormData} nextStep={nextStep} prevStep={prevStep} />
                 )}
                 {currentStep === 3 && (
-                    <Step3Terms formData={formData} updateFormData={updateFormData} prevStep={prevStep} handleSubmit={handleSubmit} submitting={submitting} />
+                    <Step3Terms formData={formData} updateFormData={updateFormData} prevStep={prevStep} handleSubmit={handleSubmit} submitting={submitting} submitError={submitError} />
                 )}
             </form>
         </div>
