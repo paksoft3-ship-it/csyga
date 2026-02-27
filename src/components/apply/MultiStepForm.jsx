@@ -5,7 +5,6 @@ import Step1Personal from "./Step1Personal";
 import Step2Journey from "./Step2Journey";
 import Step3Terms from "./Step3Terms";
 import Stepper from "./Stepper";
-import CheckoutModal from "./CheckoutModal";
 
 export default function MultiStepForm() {
     const router = useRouter();
@@ -31,19 +30,19 @@ export default function MultiStepForm() {
         agreeTerms: false,
     });
 
-    const [showCheckout, setShowCheckout] = useState(false);
-    const [submitting, setSubmitting]     = useState(false);
-    const [submitError, setSubmitError]   = useState("");
+    const [submitting, setSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState("");
 
     const nextStep = () => { if (currentStep < totalSteps) setCurrentStep(currentStep + 1); };
     const prevStep = () => { if (currentStep > 1) setCurrentStep(currentStep - 1); };
     const updateFormData = (field, value) => setFormData((prev) => ({ ...prev, [field]: value }));
 
-    const handlePay = async () => {
+    const handleProceedToCheckout = async () => {
         setSubmitting(true);
         setSubmitError("");
 
         try {
+            // Send form data + files to API (email delivered to Thecsyga@gmail.com)
             const payload = new FormData();
             payload.append("name",               formData.name);
             payload.append("email",              formData.email);
@@ -69,8 +68,14 @@ export default function MultiStepForm() {
                 return;
             }
 
-            // Email sent — now redirect to Revolut payment
-            window.location.href = "https://checkout.revolut.com/payment-link/39be6362-9836-4069-b627-3c8c3af46832";
+            // Save applicant details to sessionStorage for the checkout page
+            sessionStorage.setItem("csyga_applicant", JSON.stringify({
+                name:  formData.name,
+                email: formData.email,
+                phone: formData.phone,
+            }));
+
+            router.push("/checkout");
 
         } catch (err) {
             console.error("Submission error:", err);
@@ -81,37 +86,27 @@ export default function MultiStepForm() {
     };
 
     return (
-        <>
-            <div className="max-w-4xl mx-auto w-full">
-                <Stepper currentStep={currentStep} totalSteps={totalSteps} />
+        <div className="max-w-4xl mx-auto w-full">
+            <Stepper currentStep={currentStep} totalSteps={totalSteps} />
 
-                <form onSubmit={(e) => e.preventDefault()}>
-                    {currentStep === 1 && (
-                        <Step1Personal formData={formData} updateFormData={updateFormData} nextStep={nextStep} />
-                    )}
-                    {currentStep === 2 && (
-                        <Step2Journey formData={formData} updateFormData={updateFormData} nextStep={nextStep} prevStep={prevStep} />
-                    )}
-                    {currentStep === 3 && (
-                        <Step3Terms
-                            formData={formData}
-                            updateFormData={updateFormData}
-                            prevStep={prevStep}
-                            onOpenCheckout={() => setShowCheckout(true)}
-                        />
-                    )}
-                </form>
-            </div>
-
-            {showCheckout && (
-                <CheckoutModal
-                    formData={formData}
-                    onPay={handlePay}
-                    submitting={submitting}
-                    submitError={submitError}
-                    onClose={() => { setShowCheckout(false); setSubmitError(""); }}
-                />
-            )}
-        </>
+            <form onSubmit={(e) => e.preventDefault()}>
+                {currentStep === 1 && (
+                    <Step1Personal formData={formData} updateFormData={updateFormData} nextStep={nextStep} />
+                )}
+                {currentStep === 2 && (
+                    <Step2Journey formData={formData} updateFormData={updateFormData} nextStep={nextStep} prevStep={prevStep} />
+                )}
+                {currentStep === 3 && (
+                    <Step3Terms
+                        formData={formData}
+                        updateFormData={updateFormData}
+                        prevStep={prevStep}
+                        onProceed={handleProceedToCheckout}
+                        submitting={submitting}
+                        submitError={submitError}
+                    />
+                )}
+            </form>
+        </div>
     );
 }

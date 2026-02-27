@@ -1,4 +1,4 @@
-export default function Step3Terms({ formData, updateFormData, prevStep, onOpenCheckout }) {
+export default function Step3Terms({ formData, updateFormData, prevStep, onProceed, submitting, submitError }) {
     return (
         <div className="space-y-8 animate-fade-in">
             <div>
@@ -16,7 +16,7 @@ export default function Step3Terms({ formData, updateFormData, prevStep, onOpenC
                     <p>1.4. Selected participants are required to confirm their attendance within the given timeframe. Failure to confirm may result in forfeiture of the Fully Funded benefit.</p>
 
                     <h4 className="font-bold text-gray-900">2. Non-Refundable Application Fee</h4>
-                    <p>2.1. Applicants under the Fully Funded Category are required to pay an application processing fee as part of the submission process.</p>
+                    <p>2.1. Applicants under the Fully Funded Category are required to pay an application processing fee of <strong>$9.99 USD</strong> as part of the submission process.</p>
                     <p>2.2. The application fee is <strong>non-refundable under any circumstances</strong>, including but not limited to:</p>
                     <ul className="list-disc pl-5 space-y-1">
                         <li>Failure to be selected for the Fully Funded Category</li>
@@ -35,11 +35,11 @@ export default function Step3Terms({ formData, updateFormData, prevStep, onOpenC
                     <p>4.2. Participants are responsible for obtaining any required visas or travel permits. The organizers will provide necessary supporting documentation but are not liable for visa rejections or travel delays.</p>
 
                     <h4 className="font-bold text-gray-900">5. Media Release and Consent</h4>
-                    <p>5.1. By participating, you grant the organizers, partners, and affiliates the irrevovable right to take photographs and video recordings of you during the event.</p>
+                    <p>5.1. By participating, you grant the organizers, partners, and affiliates the irrevocable right to take photographs and video recordings of you during the event.</p>
                 </div>
 
                 <div className="mt-8 space-y-4">
-                    {/* Payment fee notice */}
+                    {/* $9.99 fee notice */}
                     <div className="flex items-start gap-3 bg-amber-50 border-2 border-amber-400 rounded-xl px-5 py-4">
                         <span className="material-symbols-outlined text-amber-500 text-[22px] shrink-0 mt-0.5">payments</span>
                         <div>
@@ -64,11 +64,18 @@ export default function Step3Terms({ formData, updateFormData, prevStep, onOpenC
                             onChange={(e) => updateFormData("agreeTerms", e.target.checked)}
                         />
                         <span className="text-sm text-gray-700 leading-relaxed font-bold">
-                            By clicking the &apos;I Agree&apos; button below, you acknowledge that you have read, understood, and agree to abide by the above Terms and Conditions, including the non-refundable $9.99 application fee.
+                            By clicking the &apos;Proceed to Checkout&apos; button below, you acknowledge that you have read, understood, and agree to abide by the above Terms and Conditions, including the non-refundable $9.99 USD application fee.
                         </span>
                     </label>
                 </div>
             </div>
+
+            {submitError && (
+                <div className="flex items-start gap-3 bg-red-50 border border-red-200 text-red-700 rounded-xl px-5 py-4 text-sm">
+                    <span className="material-symbols-outlined text-[18px] mt-0.5 shrink-0">error</span>
+                    <span>{submitError}</span>
+                </div>
+            )}
 
             <div className="flex justify-between pt-6 border-t border-gray-100">
                 <button
@@ -80,12 +87,15 @@ export default function Step3Terms({ formData, updateFormData, prevStep, onOpenC
                 </button>
                 <button
                     type="button"
-                    onClick={onOpenCheckout}
-                    disabled={!formData.agreeTerms}
-                    className={`px-8 py-3 rounded-full font-bold transition shadow-md flex items-center gap-2 ${formData.agreeTerms ? 'bg-accent hover:bg-accent/90 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+                    onClick={onProceed}
+                    disabled={!formData.agreeTerms || submitting}
+                    className={`px-8 py-3 rounded-full font-bold transition shadow-md flex items-center gap-2 ${formData.agreeTerms && !submitting ? 'bg-accent hover:bg-accent/90 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
                 >
-                    Proceed to Checkout
-                    <span className="material-symbols-outlined">shopping_cart_checkout</span>
+                    {submitting ? (
+                        <><span className="material-symbols-outlined animate-spin text-[18px]">progress_activity</span> Submitting...</>
+                    ) : (
+                        <>Proceed to Checkout <span className="material-symbols-outlined">shopping_cart_checkout</span></>
+                    )}
                 </button>
             </div>
         </div>
