@@ -1,4 +1,4 @@
-export default function Step3Terms({ formData, updateFormData, prevStep, handleSubmit, submitting, submitError }) {
+export default function Step3Terms({ formData, updateFormData, prevStep, onOpenCheckout }) {
     return (
         <div className="space-y-8 animate-fade-in">
             <div>
@@ -38,7 +38,21 @@ export default function Step3Terms({ formData, updateFormData, prevStep, handleS
                     <p>5.1. By participating, you grant the organizers, partners, and affiliates the irrevovable right to take photographs and video recordings of you during the event.</p>
                 </div>
 
-                <div className="mt-8">
+                <div className="mt-8 space-y-4">
+                    {/* Payment fee notice */}
+                    <div className="flex items-start gap-3 bg-amber-50 border-2 border-amber-400 rounded-xl px-5 py-4">
+                        <span className="material-symbols-outlined text-amber-500 text-[22px] shrink-0 mt-0.5">payments</span>
+                        <div>
+                            <p className="text-sm font-black text-amber-800">
+                                Non-Refundable Application Processing Fee: <span className="text-lg">$9.99 USD</span>
+                            </p>
+                            <p className="text-xs text-amber-700 mt-1 leading-relaxed">
+                                A one-time, non-refundable application fee of <strong>$9.99 USD</strong> is required to complete your submission. This fee covers administrative and processing costs and is not a guarantee of selection.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Agree checkbox */}
                     <label className="flex items-start gap-4 cursor-pointer group p-4 bg-gray-50 border border-gray-200 rounded-xl hover:border-primary transition-colors">
                         <div className={`mt-0.5 w-6 h-6 rounded flex items-center justify-center border-2 transition-colors ${formData.agreeTerms ? 'bg-primary border-primary' : 'bg-white border-gray-300 group-hover:border-primary'}`}>
                             {formData.agreeTerms && <span className="material-symbols-outlined text-[16px] text-white">check</span>}
@@ -50,18 +64,11 @@ export default function Step3Terms({ formData, updateFormData, prevStep, handleS
                             onChange={(e) => updateFormData("agreeTerms", e.target.checked)}
                         />
                         <span className="text-sm text-gray-700 leading-relaxed font-bold">
-                            By clicking the 'I Agree' button below, you acknowledge that you have read, understood, and agree to abide by the above Terms and Conditions.
+                            By clicking the &apos;I Agree&apos; button below, you acknowledge that you have read, understood, and agree to abide by the above Terms and Conditions, including the non-refundable $9.99 application fee.
                         </span>
                     </label>
                 </div>
             </div>
-
-            {submitError && (
-                <div className="mt-6 flex items-start gap-3 bg-red-50 border border-red-200 text-red-700 rounded-xl px-5 py-4 text-sm">
-                    <span className="material-symbols-outlined text-[18px] mt-0.5 shrink-0">error</span>
-                    <span>{submitError}</span>
-                </div>
-            )}
 
             <div className="flex justify-between pt-6 border-t border-gray-100">
                 <button
@@ -72,13 +79,13 @@ export default function Step3Terms({ formData, updateFormData, prevStep, handleS
                     Previous
                 </button>
                 <button
-                    type="submit"
-                    onClick={handleSubmit}
-                    className={`px-8 py-3 rounded-full font-bold transition shadow-md flex items-center gap-2 ${formData.agreeTerms && !submitting ? 'bg-accent hover:bg-accent/90 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
-                    disabled={!formData.agreeTerms || submitting}
+                    type="button"
+                    onClick={onOpenCheckout}
+                    disabled={!formData.agreeTerms}
+                    className={`px-8 py-3 rounded-full font-bold transition shadow-md flex items-center gap-2 ${formData.agreeTerms ? 'bg-accent hover:bg-accent/90 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
                 >
-                    {submitting ? "Submitting..." : "Submit Application"}
-                    <span className="material-symbols-outlined">{submitting ? "hourglass_empty" : "send"}</span>
+                    Proceed to Checkout
+                    <span className="material-symbols-outlined">shopping_cart_checkout</span>
                 </button>
             </div>
         </div>
