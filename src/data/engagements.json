@@ -7,12 +7,12 @@
     },
     "summitBanner": {
         "badge": "Applications Open",
-        "title": "Digital Diplomacy Summit 2025",
-        "dateLocation": "May 22 - 24, 2025 | Istanbul",
+        "title": "Digital Diplomacy Summit 2026",
+        "dateLocation": "June 19 - 21, 2026 | Istanbul",
         "description": "Includes official visits to international organizations and city tour. Join emerging leaders from around the world for an immersive experience in digital diplomacy.",
         "deadline": "Deadline: March 15, 2026",
         "link": "/apply",
-        "image": "/images/4.jpg"
+        "image": "/DigitalDiplomacySummit2026.jpeg"
     },
     "dynamicEngagements": {
         "title": "Dynamic Engagements",
@@ -25,7 +25,7 @@
             "Sustainable Development Goals Acceleration"
         ],
         "linkText": "Apply for Digital Diplomacy Summit",
-        "image": "/images/4.jpg",
+        "image": "/DynamicExchange.jpeg",
         "relatedEvents": [
             {
                 "title": "New Diplomacy Conference 2025 (Dec 6)",
@@ -90,7 +90,7 @@
             }
         ],
         "linkText": "Apply for Digital Diplomacy Summit",
-        "image": "/images/1.jpg",
+        "image": "/NewDeplomacyConference.jpeg",
         "relatedEvents": [
             {
                 "title": "Intercultural Communication in the Modern World (Nov 20)",
@@ -110,7 +110,7 @@
             "Digital storytelling projects"
         ],
         "linkText": "Apply for Digital Diplomacy Summit",
-        "image": "/images/5.jpg",
+        "image": "/YouthAndCivilSocity.jpeg",
         "relatedEvents": [
             {
                 "title": "New Diplomacy Conference 2025 (Dec 6)",

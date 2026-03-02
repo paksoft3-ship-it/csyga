@@ -6,7 +6,7 @@ export default function EventsPage() {
         <>
             <PageHeader
                 title="Our Events"
-                description="Explore our calendar—join upcoming gatherings or revisit highlights from past programs."
+                description="Explore our calendar. Join upcoming gatherings or revisit highlights from past programs."
                 bgImage="/images/4.jpg"
             />
 

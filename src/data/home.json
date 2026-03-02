@@ -5,14 +5,14 @@
         "description": "The Center for Strategic Youth and Global Affairs (CSYGA) is a youth-led platform dedicated to equipping the next generation of leaders with strategic tools to influence global policy and governance. From diplomacy and conflict resolution to academic exchange and policy innovation, CSYGA empowers youth as active agents of change in today's complex international landscape.",
         "buttons": [
             {
-                "label": "Explore Programs",
-                "href": "/engagements",
+                "label": "Apply Now",
+                "href": "/apply",
                 "icon": "rocket_launch",
                 "primary": true
             },
             {
-                "label": "Join Our Movement",
-                "href": "/get-involved",
+                "label": "Explore Programs",
+                "href": "/engagements",
                 "icon": "group_add",
                 "primary": false
             }
@@ -49,7 +49,7 @@
                 "title": "Dynamic Engagements",
                 "description": "Interactive sessions where youth engage with policymakers, debate global issues, and develop actionable solutions for international challenges.",
                 "icon": "campaign",
-                "image": "/images/4.jpg",
+                "image": "/DynamicExchange.jpeg",
                 "link": "/engagements#dynamic"
             },
             {
@@ -63,7 +63,7 @@
                 "title": "Workshops",
                 "description": "Skill-building sessions focused on negotiation techniques, cultural intelligence, policy analysis, and leadership development for aspiring diplomats.",
                 "icon": "school",
-                "image": "/images/1.jpg",
+                "image": "/NewDeplomacyConference.jpeg",
                 "link": "/engagements#workshops"
             }
         ]

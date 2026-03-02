@@ -111,17 +111,17 @@
         "description": "A glimpse into our past programs and achievements",
         "items": [
             {
-                "image": "/images/1.jpg",
+                "image": "/NewDeplomacyConference.jpeg",
                 "title": "New Diplomacy Conference 2025",
                 "description": "25+ delegates from 15+ countries explored conflict resolution and youth-driven policy innovation."
             },
             {
-                "image": "/images/2.jpg",
+                "image": "/BordersAndBrinkManship.jpeg",
                 "title": "Borders and Brinkmanship Forum",
                 "description": "Policy discussions on Pakistan-Türkiye strategic axis with defense and economy experts."
             },
             {
-                "image": "/images/5.jpg",
+                "image": "/YouthAndCivilSocity.jpeg",
                 "title": "Youth & Civil Society Workshop",
                 "description": "Hands-on training in mediation, digital dialogue, and community action planning."
             }
