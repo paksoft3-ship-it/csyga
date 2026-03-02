@@ -40,7 +40,7 @@ export default function EventsTabs() {
                         <div className="animate-in fade-in duration-300">
                             {eventsData.upcoming.map((event, idx) => (
                                 <div key={idx} className="group flex flex-col lg:flex-row bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100 mb-6">
-                                    <div className="lg:w-1/2 h-64 lg:h-auto relative overflow-hidden">
+                                    <div className="lg:w-1/2 relative flex items-center justify-center bg-gray-50">
                                         {event.featured && (
                                             <div className="absolute top-4 left-4 z-20">
                                                 <span className="px-4 py-2 bg-accent text-white text-xs font-bold rounded-full shadow-lg">Featured Event</span>
@@ -49,8 +49,9 @@ export default function EventsTabs() {
                                         <Image
                                             src={event.image}
                                             alt={event.title}
-                                            fill
-                                            className="object-cover transform group-hover:scale-105 transition-transform duration-500"
+                                            width={900}
+                                            height={600}
+                                            className="w-full h-auto object-contain"
                                         />
                                     </div>
                                     <div className="lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center">

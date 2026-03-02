@@ -1,12 +1,13 @@
 export default function Stepper({ currentStep, totalSteps }) {
     const steps = [
-        { num: 1, label: "STEP 1" },
-        { num: 2, label: "STEP 2" },
-        { num: 3, label: "STEP 3" },
+        { num: 1, label: "PERSONAL" },
+        { num: 2, label: "JOURNEY" },
+        { num: 3, label: "TERMS" },
+        { num: 4, label: "PAYMENT" },
     ];
 
     return (
-        <div className="flex items-center gap-4 mb-8">
+        <div className="flex items-center gap-2 mb-8 flex-wrap">
             {steps.map((step, idx) => (
                 <div key={idx} className="flex items-center gap-2">
                     <div
@@ -18,13 +19,13 @@ export default function Stepper({ currentStep, totalSteps }) {
                         {currentStep > step.num ? <span className="material-symbols-outlined text-sm">check</span> : step.num}
                     </div>
                     <span
-                        className={`text-sm font-bold ${currentStep >= step.num ? "text-gray-900" : "text-gray-400"
+                        className={`text-xs font-bold ${currentStep >= step.num ? "text-gray-900" : "text-gray-400"
                             }`}
                     >
                         {step.label}
                     </span>
                     {idx < steps.length - 1 && (
-                        <div className="w-12 border-t border-gray-200 mx-2"></div>
+                        <div className="w-8 border-t border-gray-200 mx-1"></div>
                     )}
                 </div>
             ))}

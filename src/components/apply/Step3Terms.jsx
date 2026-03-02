@@ -64,7 +64,7 @@ export default function Step3Terms({ formData, updateFormData, prevStep, onProce
                             onChange={(e) => updateFormData("agreeTerms", e.target.checked)}
                         />
                         <span className="text-sm text-gray-700 leading-relaxed font-bold">
-                            By clicking the &apos;Proceed to Checkout&apos; button below, you acknowledge that you have read, understood, and agree to abide by the above Terms and Conditions, including the non-refundable $9.99 USD application fee.
+                            By clicking the &apos;Proceed to Payment&apos; button below, you acknowledge that you have read, understood, and agree to abide by the above Terms and Conditions, including the non-refundable $9.99 USD application fee.
                         </span>
                     </label>
                 </div>
@@ -94,7 +94,7 @@ export default function Step3Terms({ formData, updateFormData, prevStep, onProce
                     {submitting ? (
                         <><span className="material-symbols-outlined animate-spin text-[18px]">progress_activity</span> Submitting...</>
                     ) : (
-                        <>Proceed to Checkout <span className="material-symbols-outlined">shopping_cart_checkout</span></>
+                        <>Proceed to Payment <span className="material-symbols-outlined">payment</span></>
                     )}
                 </button>
             </div>

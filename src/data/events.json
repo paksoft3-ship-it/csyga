@@ -1,15 +1,15 @@
 {
     "upcoming": [
         {
-            "title": "Digital Diplomacy Summit 2025",
-            "date": "May 22-24, 2025",
+            "title": "Digital Diplomacy Summit 2026",
+            "date": "June 19-21, 2026",
             "location": "Istanbul",
             "description": "Join us for an immersive summit exploring digital diplomacy, AI in governance, and youth leadership in the digital age. Applications open until March 10th.",
             "features": [
                 "3-Day Program",
                 "Includes official visits & city tour"
             ],
-            "image": "/images/4.jpg",
+            "image": "/DigitalDiplomacySummit2026.jpeg",
             "cta": "Register Now",
             "link": "/apply",
             "featured": true

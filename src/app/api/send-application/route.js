@@ -79,6 +79,7 @@ export async function POST(request) {
         const socialCauses       = formData.get("socialCauses")       || "";
         const headshotFile       = formData.get("headshot");
         const resumeFile         = formData.get("resume");
+        const receiptFile        = formData.get("paymentReceipt");
 
         // ── Build attachments ──────────────────────────────────────────────────
         const attachments = [];
@@ -107,6 +108,17 @@ export async function POST(request) {
             });
         } else {
             console.log("[attach] no resume received — type:", typeof resumeFile, "size:", resumeFile?.size);
+        }
+
+        if (receiptFile instanceof Blob && receiptFile.size > 0) {
+            console.log("[attach] payment receipt:", receiptFile.name, receiptFile.size, "bytes");
+            const buffer = await fileToBuffer(receiptFile);
+            const ext = receiptFile.name?.split(".").pop() || "jpg";
+            attachments.push({
+                filename: `payment-receipt-${name.replace(/\s+/g, "-")}.${ext}`,
+                content: buffer,
+                contentType: receiptFile.type || "image/jpeg",
+            });
         }
 
         console.log("[attach] total attachments to send:", attachments.length);
@@ -155,10 +167,20 @@ export async function POST(request) {
                         <h2 style="color:#195eb3;margin-top:28px;">Statement of Purpose</h2>
                         <p style="background:#f6f7f8;padding:16px;border-radius:6px;line-height:1.6;">${statementOfPurpose}</p>
 
-                        <div style="margin-top:20px;padding:12px 16px;border-radius:8px;background:${attachments.length > 0 ? '#e8f5e9' : '#fff3e0'};border:1px solid ${attachments.length > 0 ? '#a5d6a7' : '#ffcc80'};">
-                            <strong>${attachments.length > 0 ? `📎 ${attachments.length} file(s) attached:` : '⚠️ No files attached'}</strong>
-                            ${attachments.length > 0 ? `<ul style="margin:8px 0 0;padding-left:20px;">${attachments.map(a => `<li>${a.filename} (${a.contentType})</li>`).join("")}</ul>` : ""}
+                        <div style="margin-top:20px;padding:12px 16px;border-radius:8px;background:#e8f5e9;border:1px solid #a5d6a7;">
+                            <strong>📎 ${attachments.length} file(s) attached:</strong>
+                            <ul style="margin:8px 0 0;padding-left:20px;">
+                                ${attachments.map(a => `<li>${a.filename} (${a.contentType})</li>`).join("")}
+                            </ul>
                         </div>
+                        ${receiptFile instanceof Blob && receiptFile.size > 0
+                            ? `<div style="margin-top:12px;padding:12px 16px;border-radius:8px;background:#e3f2fd;border:1px solid #90caf9;">
+                                <strong>💳 Payment receipt attached</strong> — please verify the $9.99 Revolut payment matches this application before approving.
+                               </div>`
+                            : `<div style="margin-top:12px;padding:12px 16px;border-radius:8px;background:#fff3e0;border:1px solid #ffcc80;">
+                                <strong>⚠️ No payment receipt uploaded</strong> — verify payment manually before approving.
+                               </div>`
+                        }
 
                         <hr style="border:none;border-top:1px solid #e0e0e0;margin:28px 0;" />
                         <p style="color:#888;font-size:13px;">Automatically generated from the CSYGA application form.</p>
