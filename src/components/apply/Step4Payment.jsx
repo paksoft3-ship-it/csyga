@@ -1,43 +1,41 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 
-// State machine: idle → creating → paying → verifying → done | error
-const STATES = {
-    IDLE: "idle",
-    CREATING: "creating",
-    PAYING: "paying",
-    VERIFYING: "verifying",
-    DONE: "done",
-    ERROR: "error",
-};
+const REVOLUT_LINK = "https://checkout.revolut.com/payment-link/53c90abb-e5a6-4e9b-a692-9dfd42087cb4";
 
 export default function Step4Payment({ prevStep, formData }) {
     const router = useRouter();
-    const [stage, setStage] = useState(STATES.IDLE);
+    const [receipt, setReceipt] = useState(null);
+    const [submitting, setSubmitting] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
-    const revolutLoaded = useRef(false);
+    const fileInputRef = useRef(null);
 
-    // Load RevolutCheckout.js embed script once
-    useEffect(() => {
-        if (revolutLoaded.current || document.getElementById("revolut-embed")) return;
-        const script = document.createElement("script");
-        script.id = "revolut-embed";
-        const mode = process.env.NEXT_PUBLIC_REVOLUT_MODE === "sandbox" ? "sandbox" : "prod";
-        script.src = mode === "sandbox"
-            ? "https://sandbox-merchant.revolut.com/embed.js"
-            : "https://merchant.revolut.com/embed.js";
-        script.async = true;
-        document.body.appendChild(script);
-        revolutLoaded.current = true;
-    }, []);
+    const handleReceiptChange = (e) => {
+        const file = e.target.files?.[0] || null;
+        setReceipt(file);
+        setErrorMsg("");
+    };
 
-    const handlePayNow = async () => {
-        setStage(STATES.CREATING);
+    const handleDrop = (e) => {
+        e.preventDefault();
+        const file = e.dataTransfer.files?.[0] || null;
+        if (file) {
+            setReceipt(file);
+            setErrorMsg("");
+        }
+    };
+
+    const handleSubmit = async () => {
+        if (!receipt) {
+            setErrorMsg("Please upload your payment receipt before submitting.");
+            return;
+        }
+
+        setSubmitting(true);
         setErrorMsg("");
 
         try {
-            // ── Step 1: Upload files + create Revolut order ────────────────────
             const payload = new FormData();
             payload.append("name",               formData.name);
             payload.append("email",              formData.email);
@@ -56,100 +54,61 @@ export default function Step4Payment({ prevStep, formData }) {
                 : formData.socialCauses || "");
             if (formData.headshot) payload.append("headshot", formData.headshot);
             if (formData.resume)   payload.append("resume",   formData.resume);
+            payload.append("paymentReceipt", receipt);
 
-            const createRes = await fetch("/api/create-revolut-order", {
+            const res = await fetch("/api/send-application", {
                 method: "POST",
                 body: payload,
             });
-            const createData = await createRes.json();
+            const data = await res.json();
 
-            if (!createRes.ok || !createData.success) {
-                throw new Error(createData.error || "Failed to initialise payment.");
+            if (!res.ok || !data.success) {
+                throw new Error(data.error || "Submission failed. Please try again.");
             }
 
-            const { token, orderId, pendingId } = createData;
-
-            // ── Step 2: Open RevolutCheckout popup ────────────────────────────
-            if (typeof window.RevolutCheckout === "undefined") {
-                throw new Error("Payment widget failed to load. Please refresh and try again.");
-            }
-
-            setStage(STATES.PAYING);
-
-            const instance = await window.RevolutCheckout(token, {
-                mode: process.env.NEXT_PUBLIC_REVOLUT_MODE === "sandbox" ? "sandbox" : "prod",
-            });
-
-            instance.payWithPopup({
-                onSuccess: async () => {
-                    // ── Step 3: Verify payment server-side ─────────────────────
-                    setStage(STATES.VERIFYING);
-
-                    try {
-                        const verifyRes = await fetch("/api/verify-and-submit", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ orderId, pendingId }),
-                        });
-                        const verifyData = await verifyRes.json();
-
-                        if (!verifyRes.ok || !verifyData.success) {
-                            throw new Error(verifyData.error || "Payment verification failed.");
-                        }
-
-                        setStage(STATES.DONE);
-                        router.push("/apply/success");
-                    } catch (err) {
-                        // Even if verify-and-submit fails, webhook may still fire.
-                        // Show a soft warning rather than a hard error.
-                        console.error("[verify] error:", err.message);
-                        setErrorMsg(
-                            "Payment received — your application is being processed. " +
-                            "If you don't receive a confirmation email within 10 minutes, " +
-                            "please contact us."
-                        );
-                        setStage(STATES.ERROR);
-                    }
-                },
-                onError: (message) => {
-                    console.error("[revolut] payment error:", message);
-                    setErrorMsg(message || "Payment failed. Please try again.");
-                    setStage(STATES.ERROR);
-                },
-                onCancel: () => {
-                    console.log("[revolut] payment cancelled");
-                    setStage(STATES.IDLE);
-                },
-            });
-
+            router.push("/apply/success");
         } catch (err) {
-            console.error("[pay-now] error:", err.message);
+            console.error("[submit] error:", err.message);
             setErrorMsg(err.message || "Something went wrong. Please try again.");
-            setStage(STATES.ERROR);
+            setSubmitting(false);
         }
     };
-
-    const isWorking = stage === STATES.CREATING || stage === STATES.PAYING || stage === STATES.VERIFYING;
-
-    const statusLabel = {
-        [STATES.CREATING]:  "Setting up payment…",
-        [STATES.PAYING]:    "Waiting for payment…",
-        [STATES.VERIFYING]: "Verifying payment…",
-    }[stage] || "";
 
     return (
         <div className="space-y-8 animate-fade-in">
             <div className="text-center">
                 <h2 className="text-2xl font-bold text-gray-900 mb-1">Complete Your Payment</h2>
                 <p className="text-gray-500 text-sm">
-                    Pay the $9.99 registration fee to submit your application automatically
+                    Pay the $9.99 registration fee, then upload your receipt to submit your application
                 </p>
+            </div>
+
+            {/* ── Step instructions ──────────────────────────────────────────── */}
+            <div className="max-w-md mx-auto flex items-center justify-center gap-0">
+                {[
+                    { icon: "payments", label: "Pay $9.99" },
+                    { icon: "arrow_forward", label: null, arrow: true },
+                    { icon: "receipt_long", label: "Upload receipt" },
+                    { icon: "arrow_forward", label: null, arrow: true },
+                    { icon: "send", label: "Submit" },
+                ].map((item, i) =>
+                    item.arrow ? (
+                        <span key={i} className="material-symbols-outlined text-gray-300 text-[20px] mx-1">
+                            arrow_forward
+                        </span>
+                    ) : (
+                        <div key={i} className="flex flex-col items-center gap-1">
+                            <div className="w-10 h-10 rounded-full bg-[#195eb3]/10 flex items-center justify-center">
+                                <span className="material-symbols-outlined text-[#195eb3] text-[20px]">{item.icon}</span>
+                            </div>
+                            <span className="text-[11px] text-gray-500 font-medium whitespace-nowrap">{item.label}</span>
+                        </div>
+                    )
+                )}
             </div>
 
             {/* ── Payment card ──────────────────────────────────────────────── */}
             <div className="max-w-md mx-auto bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-md">
-
-                {/* Amount header */}
                 <div className="px-6 pt-6 pb-4">
                     <p className="text-2xl font-black text-gray-900">Pay $9.99</p>
                     <p className="text-sm text-gray-500 mt-0.5 font-medium">
@@ -163,54 +122,24 @@ export default function Step4Payment({ prevStep, formData }) {
 
                 <div className="border-t border-gray-100" />
 
-                {/* Pay Now button */}
-                <div className="px-6 py-6">
-                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">
-                        Secure payment via Revolut
+                <div className="px-6 py-6 space-y-4">
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest">
+                        Step 1 — Pay via Revolut
                     </p>
 
-                    <button
-                        type="button"
-                        onClick={handlePayNow}
-                        disabled={isWorking}
-                        className={`w-full py-4 rounded-xl font-bold text-base transition-all flex items-center justify-center gap-2 shadow-sm
-                            ${isWorking
-                                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                                : "bg-[#191C1F] hover:bg-[#2c3035] text-white"
-                            }`}
+                    <a
+                        href={REVOLUT_LINK}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-4 rounded-xl font-bold text-base bg-[#191C1F] hover:bg-[#2c3035] text-white flex items-center justify-center gap-2 shadow-sm transition-all"
                     >
-                        {isWorking ? (
-                            <>
-                                <span className="material-symbols-outlined animate-spin text-[20px]">progress_activity</span>
-                                {statusLabel}
-                            </>
-                        ) : (
-                            <>
-                                <span className="material-symbols-outlined text-[20px]">payments</span>
-                                Pay Now with Revolut
-                            </>
-                        )}
-                    </button>
+                        <span className="material-symbols-outlined text-[20px]">open_in_new</span>
+                        Pay Now via Revolut
+                    </a>
 
-                    {/* Payment method icons */}
-                    <div className="flex items-center justify-center gap-3 mt-4 opacity-60">
-                        {/* Visa */}
-                        <svg width="36" height="22" viewBox="0 0 780 500" fill="none">
-                            <rect width="780" height="500" rx="40" fill="#1A1F71"/>
-                            <text x="120" y="320" fill="white" fontSize="230" fontWeight="bold" fontFamily="Arial">VISA</text>
-                        </svg>
-                        {/* Mastercard */}
-                        <svg width="32" height="22" viewBox="0 0 131.39 86.9" fill="none">
-                            <rect x="0" y="0" width="131.39" height="86.9" rx="6" fill="#252525"/>
-                            <circle cx="48.37" cy="43.45" r="27.23" fill="#eb001b"/>
-                            <circle cx="83.02" cy="43.45" r="27.23" fill="#f79e1b"/>
-                            <path d="M65.7 19.73a27.23 27.23 0 0 1 0 47.44A27.23 27.23 0 0 1 65.7 19.73z" fill="#ff5f00"/>
-                        </svg>
-                        {/* Apple Pay text */}
-                        <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-0.5 rounded">Apple Pay</span>
-                        {/* Google Pay text */}
-                        <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-0.5 rounded">G Pay</span>
-                    </div>
+                    <p className="text-xs text-gray-400 text-center">
+                        Opens a secure Revolut payment page — pay $9.99, then come back here
+                    </p>
                 </div>
 
                 <div className="border-t border-gray-100 px-6 py-3 bg-gray-50 text-center">
@@ -221,23 +150,54 @@ export default function Step4Payment({ prevStep, formData }) {
                 </div>
             </div>
 
-            {/* ── Info box ─────────────────────────────────────────────────── */}
-            <div className="max-w-md mx-auto bg-blue-50 border border-blue-200 rounded-2xl p-5">
-                <div className="flex items-start gap-3">
-                    <span className="material-symbols-outlined text-blue-500 text-[22px] shrink-0 mt-0.5">info</span>
-                    <div>
-                        <p className="text-sm font-bold text-blue-800">How it works</p>
-                        <p className="text-xs text-blue-700 mt-0.5 leading-relaxed">
-                            Click <strong>Pay Now</strong> — a secure Revolut popup will open.
-                            Once payment is confirmed, your application is submitted automatically.
-                            No receipt upload needed.
-                        </p>
-                    </div>
+            {/* ── Receipt upload ────────────────────────────────────────────── */}
+            <div className="max-w-md mx-auto space-y-3">
+                <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest">
+                    Step 2 — Upload your payment receipt
+                </p>
+
+                <div
+                    onClick={() => fileInputRef.current?.click()}
+                    onDrop={handleDrop}
+                    onDragOver={(e) => e.preventDefault()}
+                    className={`border-2 border-dashed rounded-2xl p-6 cursor-pointer transition-colors text-center
+                        ${receipt
+                            ? "border-green-400 bg-green-50"
+                            : "border-gray-200 bg-gray-50 hover:border-[#195eb3] hover:bg-blue-50"
+                        }`}
+                >
+                    <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*,.pdf"
+                        className="hidden"
+                        onChange={handleReceiptChange}
+                    />
+
+                    {receipt ? (
+                        <div className="flex flex-col items-center gap-2">
+                            <span className="material-symbols-outlined text-green-500 text-[36px]">check_circle</span>
+                            <p className="text-sm font-semibold text-green-700">{receipt.name}</p>
+                            <p className="text-xs text-green-600">
+                                {(receipt.size / 1024).toFixed(0)} KB — click to replace
+                            </p>
+                        </div>
+                    ) : (
+                        <div className="flex flex-col items-center gap-2">
+                            <span className="material-symbols-outlined text-gray-400 text-[36px]">upload_file</span>
+                            <p className="text-sm font-semibold text-gray-600">
+                                Upload payment receipt
+                            </p>
+                            <p className="text-xs text-gray-400">
+                                Screenshot or PDF — drag & drop or click to browse
+                            </p>
+                        </div>
+                    )}
                 </div>
             </div>
 
             {/* ── Error ────────────────────────────────────────────────────── */}
-            {stage === STATES.ERROR && errorMsg && (
+            {errorMsg && (
                 <div className="max-w-md mx-auto flex items-start gap-3 bg-red-50 border border-red-200 text-red-700 rounded-xl px-5 py-4 text-sm">
                     <span className="material-symbols-outlined text-[18px] mt-0.5 shrink-0">error</span>
                     <span>{errorMsg}</span>
@@ -249,10 +209,33 @@ export default function Step4Payment({ prevStep, formData }) {
                 <button
                     type="button"
                     onClick={prevStep}
-                    disabled={isWorking}
+                    disabled={submitting}
                     className="bg-gray-100 text-gray-700 px-8 py-3 rounded-full font-bold hover:bg-gray-200 transition shadow-sm disabled:opacity-50"
                 >
                     Previous
+                </button>
+
+                <button
+                    type="button"
+                    onClick={handleSubmit}
+                    disabled={submitting || !receipt}
+                    className={`px-8 py-3 rounded-full font-bold transition shadow-sm flex items-center gap-2
+                        ${submitting || !receipt
+                            ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                            : "bg-[#195eb3] hover:bg-[#1449a0] text-white"
+                        }`}
+                >
+                    {submitting ? (
+                        <>
+                            <span className="material-symbols-outlined animate-spin text-[18px]">progress_activity</span>
+                            Submitting…
+                        </>
+                    ) : (
+                        <>
+                            <span className="material-symbols-outlined text-[18px]">send</span>
+                            Submit Application
+                        </>
+                    )}
                 </button>
             </div>
         </div>
