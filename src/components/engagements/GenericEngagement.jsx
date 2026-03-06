@@ -4,9 +4,6 @@ import Link from "next/link";
 export default function GenericEngagement({
     id,
     data,
-    iconName,
-    iconBgColor,
-    iconTextColor,
     imageGradient,
     bulletIconColor,
     ctaBg,
@@ -22,9 +19,6 @@ export default function GenericEngagement({
 
                     {/* Text Content */}
                     <div className={`order-2 ${reverseLayout ? 'lg:order-2' : 'lg:order-1'}`}>
-                        <div className={`size-14 rounded-2xl ${iconBgColor} flex items-center justify-center ${iconTextColor} mb-6`}>
-                            <span className="material-symbols-outlined text-3xl">{iconName}</span>
-                        </div>
                         <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-6">{title}</h2>
                         <p className="text-gray-600 text-lg leading-relaxed mb-4">{p1}</p>
                         <p className="text-gray-600 mb-6">{p2}</p>

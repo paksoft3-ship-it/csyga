@@ -1,15 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import siteData from "@/data/site.json";
 
 export default function TopNavBar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [openDropdown, setOpenDropdown] = useState(null);
+    const closeTimerRef = useRef(null);
+
+    const handleDropdownEnter = (index) => {
+        if (closeTimerRef.current) {
+            clearTimeout(closeTimerRef.current);
+            closeTimerRef.current = null;
+        }
+        setOpenDropdown(index);
+    };
+
+    const handleDropdownLeave = () => {
+        closeTimerRef.current = setTimeout(() => {
+            setOpenDropdown(null);
+            closeTimerRef.current = null;
+        }, 140);
+    };
+
+    useEffect(() => {
+        return () => {
+            if (closeTimerRef.current) {
+                clearTimeout(closeTimerRef.current);
+            }
+        };
+    }, []);
 
     return (
-        <div className="fixed top-0 w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md border-b border-[#e8edf3]">
+        <div className="fixed top-0 w-full z-[200] transition-all duration-300 bg-white/90 backdrop-blur-md border-b border-[#e8edf3]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <header className="flex items-center justify-between h-20">
                     <div className="flex items-center gap-3 text-[#0e141b]">
@@ -26,21 +51,31 @@ export default function TopNavBar() {
                     <nav className="hidden lg:flex items-center gap-8">
                         {siteData.navigation.map((item, index) => (
                             item.dropdown ? (
-                                <div key={index} className="relative group">
+                                <div
+                                    key={index}
+                                    className="relative"
+                                    onMouseEnter={() => handleDropdownEnter(index)}
+                                    onMouseLeave={handleDropdownLeave}
+                                >
                                     <Link
                                         href={item.href}
                                         className="text-sm font-semibold hover:text-primary transition-colors text-gray-700 flex items-center gap-1"
+                                        onFocus={() => handleDropdownEnter(index)}
                                     >
                                         {item.label}
                                         <span className="material-symbols-outlined text-sm">expand_more</span>
                                     </Link>
-                                    <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                                    <div
+                                        className={`absolute top-full left-0 w-56 bg-white rounded-xl shadow-xl border border-gray-100 transition-all duration-150 z-[210] ${openDropdown === index ? "opacity-100 visible translate-y-1" : "opacity-0 invisible translate-y-2 pointer-events-none"
+                                            }`}
+                                    >
                                         <div className="p-2">
                                             {item.dropdown.map((dropdownItem, idx) => (
                                                 <Link
                                                     key={idx}
                                                     href={dropdownItem.href}
                                                     className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors"
+                                                    onClick={() => setOpenDropdown(null)}
                                                 >
                                                     <span className="material-symbols-outlined text-primary">{dropdownItem.icon}</span>
                                                     <span className="text-sm font-medium text-gray-700">{dropdownItem.label}</span>

@@ -1,26 +1,48 @@
 {
     "header": {
-        "title": "Bridging the Gap Between Youth Leadership and Global Governance",
+        "title": "Bridging the Gap Between Youth Leadership and Global Governance.",
         "badge": "About CSYGA",
         "description": "The Centre for Strategic Youth and Global Affairs (CSYGA) is an international think tank and leadership incubator dedicated to empowering the next generation of diplomatic leaders.",
-        "bgImage": "/images/1.jpg"
+        "bgImage": "/BordersAndBrinkManship.jpeg"
+    },
+    "visionFocus": {
+        "title": "Vision Focus",
+        "heading": "How We Build Future Diplomats",
+        "description": "Three strategic tracks that shape every CSYGA program.",
+        "items": [
+            {
+                "icon": "analytics",
+                "title": "Strategic Research",
+                "description": "Producing practical policy insight on diplomacy, governance, and regional stability."
+            },
+            {
+                "icon": "groups",
+                "title": "Diplomatic Training",
+                "description": "Training young professionals in negotiation, mediation, and institutional communication."
+            },
+            {
+                "icon": "emoji_events",
+                "title": "Youth Leadership",
+                "description": "Mentoring youth to lead simulations, policy forums, and cross-border initiatives."
+            }
+        ]
     },
     "missionVision": {
         "mission": {
-            "title": "Our Mission",
+            "title": "The Mission",
             "p1": "To provide young leaders with the strategic tools, diplomatic training, and institutional access required to navigate and influence the complexities of modern global affairs.",
             "p2": "Through innovative programs and strategic partnerships, we create platforms for meaningful youth participation in diplomatic processes, policy development, and cross-cultural dialogue."
         },
         "vision": {
-            "title": "Our Vision",
+            "title": "The Vision",
             "p1": "To build a sustainable global ecosystem where youth-driven diplomacy, ethical technology, and humanitarian action create a more secure and inclusive world.",
-            "p2": "By 2030, we aim to establish a global network of 10,000 youth diplomats actively engaged in shaping international policy across all continents."
+            "p2": "Our long-term direction is to build a connected generation of youth diplomats who can engage institutions with competence, ethics, and strategic clarity."
         }
     },
     "corePillars": {
-        "title": "Our Foundation",
-        "heading": "Our Core Pillars",
-        "description": "The foundational principles that guide our work and programs",
+        "title": "Core Pillars",
+        "heading": "Our Operating Framework",
+        "description": "The key pillars that guide our programs, partnerships, and policy engagement.",
         "items": [
             {
                 "icon": "handshake",
@@ -33,29 +55,29 @@
                 "icon": "memory",
                 "title": "Ethical Technology",
                 "description": "Promoting the responsible use of digital tools and AI in peacebuilding and public discourse.",
-                "gradient": "from-purple-600 to-pink-400",
-                "textColor": "text-purple-600"
+                "gradient": "from-primary to-blue-400",
+                "textColor": "text-primary"
             },
             {
                 "icon": "volunteer_activism",
                 "title": "Humanitarian Action",
                 "description": "Strengthening the role of youth in crisis response, advocacy, and international cooperation.",
-                "gradient": "from-green-500 to-emerald-400",
-                "textColor": "text-green-600"
+                "gradient": "from-accent to-green-400",
+                "textColor": "text-accent"
             },
             {
                 "icon": "school",
                 "title": "Leadership Development",
                 "description": "Equipping future policymakers with technical skills in negotiation, policy analysis, and strategic communication.",
-                "gradient": "from-amber-500 to-orange-400",
-                "textColor": "text-amber-500"
+                "gradient": "from-primary to-accent",
+                "textColor": "text-primary"
             }
         ]
     },
     "whyCsyga": {
-        "title": "Our Difference",
+        "title": "Authority",
         "heading": "Why CSYGA?",
-        "description": "What sets us apart in youth diplomatic engagement",
+        "description": "What gives our platform institutional credibility and long-term value.",
         "items": [
             {
                 "icon": "military_tech",
@@ -76,10 +98,10 @@
             {
                 "icon": "strategy",
                 "title": "Strategic Impact",
-                "description": "We don't just host events; we produce policy recommendations and simulations that prepare youth for real-world diplomatic challenges.",
-                "bgColor": "bg-purple-100",
-                "textColor": "text-purple-600",
-                "hoverBorder": "hover:border-purple-200"
+                "description": "We do not only host events; we produce policy recommendations and simulations that prepare youth for real-world diplomatic challenges.",
+                "bgColor": "bg-primary/10",
+                "textColor": "text-primary",
+                "hoverBorder": "hover:border-primary/20"
             }
         ]
     },
@@ -106,25 +128,97 @@
         ]
     },
     "eventHighlights": {
-        "title": "Past Programs",
-        "heading": "Event Highlights",
-        "description": "A glimpse into our past programs and achievements",
+        "title": "Past Events",
+        "heading": "Impact From Previous Programs",
+        "description": "Every image and metric below comes from CSYGA programs and partner events.",
         "items": [
             {
                 "image": "/NewDeplomacyConference.jpeg",
                 "title": "New Diplomacy Conference 2025",
-                "description": "25+ delegates from 15+ countries explored conflict resolution and youth-driven policy innovation."
+                "description": "Delegates explored conflict resolution, policy innovation, and state-youth dialogue.",
+                "stats": [
+                    {
+                        "label": "Participants",
+                        "value": "25+"
+                    },
+                    {
+                        "label": "Countries",
+                        "value": "15+"
+                    },
+                    {
+                        "label": "Policy Sessions",
+                        "value": "6"
+                    }
+                ]
             },
             {
                 "image": "/BordersAndBrinkManship.jpeg",
                 "title": "Borders and Brinkmanship Forum",
-                "description": "Policy discussions on Pakistan-Türkiye strategic axis with defense and economy experts."
+                "description": "High-level discussions on regional security, defense economics, and diplomacy.",
+                "stats": [
+                    {
+                        "label": "Participants",
+                        "value": "40+"
+                    },
+                    {
+                        "label": "Countries",
+                        "value": "10+"
+                    },
+                    {
+                        "label": "Expert Speakers",
+                        "value": "8"
+                    }
+                ]
             },
             {
                 "image": "/YouthAndCivilSocity.jpeg",
                 "title": "Youth & Civil Society Workshop",
-                "description": "Hands-on training in mediation, digital dialogue, and community action planning."
+                "description": "Hands-on practice in mediation, digital dialogue, and civic action planning.",
+                "stats": [
+                    {
+                        "label": "Participants",
+                        "value": "60+"
+                    },
+                    {
+                        "label": "Countries",
+                        "value": "12+"
+                    },
+                    {
+                        "label": "Training Labs",
+                        "value": "5"
+                    }
+                ]
             }
         ]
+    },
+    "leadership": {
+        "title": "Leadership & Governance",
+        "description": "CSYGA is led by a board of experts in international relations, digital governance, and humanitarian diplomacy, supported by a global secretariat of passionate young professionals.",
+        "advisors": [
+            {
+                "name": "Advisor Name",
+                "role": "Senior Advisor",
+                "image": "/images/2.jpg"
+            },
+            {
+                "name": "Advisor Name",
+                "role": "Policy Advisor",
+                "image": "/images/3.jpg"
+            },
+            {
+                "name": "Advisor Name",
+                "role": "Governance Advisor",
+                "image": "/images/5.jpg"
+            },
+            {
+                "name": "Advisor Name",
+                "role": "Humanitarian Advisor",
+                "image": "/images/6.jpg"
+            }
+        ]
+    },
+    "aboutPartners": {
+        "title": "Institutional Partners",
+        "caption": "Working in collaboration with leading governmental and non-governmental institutions to foster global youth empowerment."
     }
 }

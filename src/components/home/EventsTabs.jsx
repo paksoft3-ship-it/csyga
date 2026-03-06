@@ -94,6 +94,7 @@ export default function EventsTabs() {
                                     <div className="w-full md:w-auto p-6 md:pr-12 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-gray-100 min-w-[140px]">
                                         <span className="text-sm font-bold text-accent uppercase tracking-wider mb-1">{event.month}</span>
                                         <span className="text-3xl font-black text-gray-900">{event.day}</span>
+                                        {event.year && <span className="text-xs font-semibold text-gray-500 mt-1">{event.year}</span>}
                                     </div>
                                     <div className="flex-grow p-6">
                                         <div className="flex items-center gap-3 mb-2">

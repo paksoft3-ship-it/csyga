@@ -26,7 +26,15 @@ export default function EventHighlights() {
                             </div>
                             <div className="p-6 flex-grow">
                                 <h4 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h4>
-                                <p className="text-gray-600 text-sm">{item.description}</p>
+                                <p className="text-gray-600 text-sm mb-5">{item.description}</p>
+                                <div className="grid grid-cols-3 gap-2">
+                                    {item.stats.map((stat, statIdx) => (
+                                        <div key={statIdx} className="rounded-xl bg-background-light border border-gray-100 p-3 text-center">
+                                            <div className="text-lg font-black text-primary">{stat.value}</div>
+                                            <div className="text-[11px] uppercase tracking-wide text-gray-500">{stat.label}</div>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     ))}

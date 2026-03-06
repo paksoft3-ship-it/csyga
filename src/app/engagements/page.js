@@ -20,26 +20,20 @@ export default function EngagementsPage() {
             <GenericEngagement
                 id="dynamic"
                 data={dynamicEngagements}
-                iconName="forum"
-                iconBgColor="bg-primary/10"
-                iconTextColor="text-primary"
-                imageGradient="from-blue-100 to-primary/20"
+                imageGradient="from-primary/20 to-accent/20"
                 bulletIconColor="text-accent"
                 ctaBg="bg-primary"
-                ctaHoverBg="hover:bg-blue-600"
+                ctaHoverBg="hover:bg-primary/90"
             />
 
             <div className="bg-background-light">
                 <GenericEngagement
                     id="simulations"
                     data={diplomacySimulations}
-                    iconName="handshake"
-                    iconBgColor="bg-accent/10"
-                    iconTextColor="text-accent"
-                    imageGradient="from-accent/20 to-blue-100"
+                    imageGradient="from-primary/20 to-accent/20"
                     bulletIconColor="text-accent"
                     ctaBg="bg-accent"
-                    ctaHoverBg="hover:bg-green-600"
+                    ctaHoverBg="hover:bg-accent/90"
                     reverseLayout={true}
                 />
             </div>
@@ -49,13 +43,10 @@ export default function EngagementsPage() {
             <GenericEngagement
                 id="cultural"
                 data={culturalDiplomacy}
-                iconName="diversity_3"
-                iconBgColor="bg-amber-100"
-                iconTextColor="text-amber-600"
-                imageGradient="from-amber-100 to-orange-100"
-                bulletIconColor="text-amber-500"
-                ctaBg="bg-amber-500"
-                ctaHoverBg="hover:bg-amber-600"
+                imageGradient="from-primary/20 to-accent/20"
+                bulletIconColor="text-accent"
+                ctaBg="bg-primary"
+                ctaHoverBg="hover:bg-primary/90"
                 reverseLayout={true}
             />
         </>

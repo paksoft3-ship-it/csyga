@@ -5,11 +5,11 @@ import homeData from "@/data/home.json";
 export default function EngagementsGrid() {
     const { engagements } = homeData;
 
-    // Colors mapping for styling differences (based on HTML design: purple, blue, green, etc.)
+    // Keep engagement cards inside the same brand palette (primary/accent)
     const colorMap = [
         { bg: "bg-blue-100", text: "text-primary" },
         { bg: "bg-green-100", text: "text-accent" },
-        { bg: "bg-purple-100", text: "text-purple-600" }
+        { bg: "bg-primary/10", text: "text-primary" }
     ];
 
     return (

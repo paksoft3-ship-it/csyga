@@ -63,7 +63,7 @@
                 "title": "Workshops",
                 "description": "Skill-building sessions focused on negotiation techniques, cultural intelligence, policy analysis, and leadership development for aspiring diplomats.",
                 "icon": "school",
-                "image": "/NewDeplomacyConference.jpeg",
+                "image": "/workshop.jpeg",
                 "link": "/engagements#workshops"
             }
         ]
@@ -74,40 +74,87 @@
         "description": "Highlights from our past events and programs",
         "images": [
             {
-                "src": "/images/1.jpg",
-                "alt": "New Diplomacy Conference 2025 - Group Photo",
+                "src": "/Gallery/2.jpeg",
+                "alt": "Delegates in conference hall",
                 "title": "New Diplomacy Conference 2025",
-                "desc": "Delegates from 15+ countries",
-                "large": true
+                "desc": "Delegates from 15+ countries"
             },
             {
-                "src": "/images/2.jpg",
-                "alt": "Panel Discussion",
-                "title": "Expert Panel Discussion",
+                "src": "/Gallery/3.jpeg",
+                "alt": "Interactive youth session",
+                "title": "Interactive Policy Session",
                 "desc": ""
             },
             {
-                "src": "/images/4.jpg",
-                "alt": "Global Security Panel",
-                "title": "Global Security & Conflict Resolution",
+                "src": "/Gallery/4.jpeg",
+                "alt": "Conference discussion",
+                "title": "Dialogue & Debate Forum",
+                "desc": ""
+            },
+            {
+                "src": "/Gallery/5.jpeg",
+                "alt": "Diplomacy workshop moment",
+                "title": "Workshop Collaboration",
+                "desc": ""
+            },
+            {
+                "src": "/Gallery/whatsapp-2026-03-04.jpeg",
+                "alt": "Participants in group networking moment",
+                "title": "Youth Networking Session",
+                "desc": ""
+            },
+            {
+                "src": "/images/1.jpg",
+                "alt": "Conference participants group image",
+                "title": "International Delegation",
+                "desc": ""
+            },
+            {
+                "src": "/images/2.jpg",
+                "alt": "People attending panel discussion",
+                "title": "Panel Exchange",
+                "desc": ""
+            },
+            {
+                "src": "/images/3.jpg",
+                "alt": "Youth delegates in discussion",
+                "title": "Youth Dialogue Session",
                 "desc": ""
             },
             {
                 "src": "/images/5.jpg",
-                "alt": "Interactive Session",
-                "title": "Interactive Q&A Session",
+                "alt": "Audience during event session",
+                "title": "Audience Engagement",
                 "desc": ""
             },
             {
                 "src": "/images/6.jpg",
-                "alt": "Delegate Engagement",
-                "title": "Delegate Engagement",
+                "alt": "Delegates collaborating",
+                "title": "Collaborative Diplomacy",
                 "desc": ""
             },
             {
                 "src": "/images/7.jpg",
-                "alt": "Networking Session",
-                "title": "Networking & Cultural Exchange",
+                "alt": "Event networking participants",
+                "title": "Community Networking",
+                "desc": ""
+            },
+            {
+                "src": "/workshop.jpeg",
+                "alt": "Workshop participants collaborating",
+                "title": "Hands-On Workshop",
+                "desc": ""
+            },
+            {
+                "src": "/images/1.jpg",
+                "alt": "Delegates and speakers during an in-person forum",
+                "title": "Diplomatic Forum Session",
+                "desc": ""
+            },
+            {
+                "src": "/images/5.jpg",
+                "alt": "Participants engaged in a live discussion",
+                "title": "Live Discussion Session",
                 "desc": ""
             }
         ]

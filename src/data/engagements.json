@@ -8,8 +8,8 @@
     "summitBanner": {
         "badge": "Applications Open",
         "title": "Digital Diplomacy Summit 2026",
-        "dateLocation": "June 19 - 21, 2026 | Istanbul",
-        "description": "Includes official visits to international organizations and city tour. Join emerging leaders from around the world for an immersive experience in digital diplomacy.",
+        "dateLocation": "June 19, 2026 to June 21, 2026 | Istanbul",
+        "description": "Includes official visits to international organizations. Join emerging leaders from around the world for an immersive experience in digital diplomacy.",
         "deadline": "Deadline: April 30, 2026",
         "link": "/apply",
         "image": "/DigitalDiplomacySummit2026.jpeg"
@@ -28,11 +28,11 @@
         "image": "/DynamicExchange.jpeg",
         "relatedEvents": [
             {
-                "title": "New Diplomacy Conference 2025 (Dec 6)",
+                "title": "New Diplomacy Conference 2025 (December 06, 2025)",
                 "link": "/events#panel-past"
             },
             {
-                "title": "Borders & Brinkmanship Forum (Nov 5)",
+                "title": "Borders & Brinkmanship Forum (November 05, 2025)",
                 "link": "/events#panel-past"
             }
         ]
@@ -51,7 +51,7 @@
         "image": "/images/6.jpg",
         "relatedEvents": [
             {
-                "title": "Youth & Civil Society in Resolving Conflicts (Aug 4)",
+                "title": "Youth & Civil Society in Resolving Conflicts (August 04, 2025)",
                 "link": "/events#panel-past"
             }
         ]
@@ -65,7 +65,7 @@
                 "title": "Negotiation Skills",
                 "desc": "Master the art of diplomatic negotiation.",
                 "color": "text-primary",
-                "bg": "bg-blue-100"
+                "bg": "bg-primary/10"
             },
             {
                 "icon": "public",
@@ -78,22 +78,22 @@
                 "icon": "description",
                 "title": "Policy Analysis",
                 "desc": "Evidence-based recommendations.",
-                "color": "text-purple-600",
-                "bg": "bg-purple-100"
+                "color": "text-primary",
+                "bg": "bg-primary/10"
             },
             {
                 "icon": "campaign",
                 "title": "Public Diplomacy",
                 "desc": "Effective advocacy strategies.",
-                "color": "text-amber-600",
-                "bg": "bg-amber-100"
+                "color": "text-accent",
+                "bg": "bg-accent/10"
             }
         ],
         "linkText": "Apply for Digital Diplomacy Summit",
         "image": "/NewDeplomacyConference.jpeg",
         "relatedEvents": [
             {
-                "title": "Intercultural Communication in the Modern World (Nov 20)",
+                "title": "Intercultural Communication in the Modern World (January 17, 2026)",
                 "link": "/events#panel-past"
             }
         ]
@@ -113,11 +113,11 @@
         "image": "/YouthAndCivilSocity.jpeg",
         "relatedEvents": [
             {
-                "title": "New Diplomacy Conference 2025 (Dec 6)",
+                "title": "New Diplomacy Conference 2025 (December 06, 2025)",
                 "link": "/events#panel-past"
             },
             {
-                "title": "Intercultural Communication in the Modern World (Nov 20)",
+                "title": "Intercultural Communication in the Modern World (January 17, 2026)",
                 "link": "/events#panel-past"
             }
         ]

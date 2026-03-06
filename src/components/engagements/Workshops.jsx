@@ -11,9 +11,6 @@ export default function Workshops() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
                     <div className="order-2 lg:order-1">
-                        <div className="size-14 rounded-2xl bg-purple-100 flex items-center justify-center text-purple-600 mb-6">
-                            <span className="material-symbols-outlined text-3xl">school</span>
-                        </div>
                         <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-6">{title}</h2>
                         <p className="text-gray-600 text-lg leading-relaxed mb-6">{description}</p>
 
@@ -30,7 +27,7 @@ export default function Workshops() {
                             ))}
                         </div>
 
-                        <Link href="/apply" className="inline-flex items-center gap-2 bg-purple-600 text-white px-8 py-4 rounded-full font-bold hover:bg-purple-700 transition-colors">
+                        <Link href="/apply" className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-full font-bold hover:bg-blue-600 transition-colors">
                             Apply for Workshops
                             <span className="material-symbols-outlined">arrow_forward</span>
                         </Link>
@@ -53,7 +50,7 @@ export default function Workshops() {
 
                     {/* Image */}
                     <div className="order-1 lg:order-2 relative group">
-                        <div className="absolute -inset-4 bg-gradient-to-r from-purple-100 to-pink-100 rounded-3xl opacity-50 blur-lg group-hover:opacity-70 transition-all"></div>
+                        <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl opacity-50 blur-lg group-hover:opacity-70 transition-all"></div>
                         <div className="relative w-full aspect-[4/3] rounded-3xl shadow-xl overflow-hidden cursor-pointer">
                             <Image src={image} alt={title} fill className="object-cover" />
                         </div>

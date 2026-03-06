@@ -11,9 +11,9 @@ export default function Home() {
     <>
       <HeroSection />
       <StatsSection />
+      <EventsTabs />
       <QuoteSection />
       <EngagementsGrid />
-      <EventsTabs />
       <GallerySection />
       <TestimonialsSection />
     </>
