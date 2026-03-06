@@ -344,9 +344,10 @@ export default function EventsPage() {
 
   const statItems = useMemo(
     () => [
-      { value: "10", label: "Scholarships" },
       { value: "3", label: "Summit Days" },
-      { value: "50+", label: "Delegates" },
+      { value: "10", label: "Fully Funded Scholarships" },
+      { value: "30", label: "Free Access Spots" },
+      { value: "100+", label: "Delegates" },
     ],
     []
   );
@@ -389,7 +390,7 @@ export default function EventsPage() {
               </Link>
             </div>
 
-            <div className="mt-10 grid grid-cols-3 gap-4 max-w-md">
+            <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl">
               {statItems.map((stat) => (
                 <div key={stat.label} className="rounded-2xl bg-white/12 border border-white/20 backdrop-blur-sm p-4 text-center">
                   <p className="text-3xl font-black text-white">{stat.value}</p>
