@@ -58,7 +58,7 @@ export default function Footer() {
                             </li>
                             <li className="flex items-start gap-3">
                                 <span className="material-symbols-outlined text-primary mt-0.5">phone</span>
-                                <span>+90 501 599 05 66</span>
+                                <span>+44 7459 505747</span>
                             </li>
                             <li className="flex items-start gap-3">
                                 <span className="material-symbols-outlined text-primary mt-0.5 flex-shrink-0">location_on</span>

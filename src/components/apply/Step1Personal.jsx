@@ -55,7 +55,7 @@ export default function Step1Personal({ formData, updateFormData, nextStep }) {
                             </label>
                             <input
                                 type="tel"
-                                placeholder="e.g. +92 300 0000000"
+                                placeholder="e.g. +44 7459 505747"
                                 value={formData.phone}
                                 onChange={(e) => updateFormData("phone", e.target.value)}
                                 required

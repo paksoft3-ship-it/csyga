@@ -117,7 +117,7 @@ export default function CheckoutModal({ formData, onPay, submitting, submitError
                                     <input
                                         readOnly
                                         value={formData.phone}
-                                        placeholder="Phone"
+                                        placeholder="e.g. +44 7459 505747"
                                         className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg text-sm bg-gray-50 text-gray-700 outline-none"
                                     />
                                 </div>

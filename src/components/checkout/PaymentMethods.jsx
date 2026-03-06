@@ -92,7 +92,7 @@ export default function PaymentMethods() {
                             </div>
                             <div>
                                 <label className="text-xs font-semibold text-gray-500">Phone *</label>
-                                <input readOnly value={applicant.phone} placeholder="Phone"
+                                <input readOnly value={applicant.phone} placeholder="e.g. +44 7459 505747"
                                     className="w-full mt-1 px-3 py-2.5 border border-gray-200 rounded-lg text-sm bg-gray-50 text-gray-700 outline-none" />
                             </div>
                             <div>
