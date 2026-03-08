@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function MetaPixelPageViewTracker() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const hasMounted = useRef(false);
 
   useEffect(() => {
@@ -18,7 +17,7 @@ export default function MetaPixelPageViewTracker() {
     if (typeof window !== "undefined" && typeof window.fbq === "function") {
       window.fbq("track", "PageView");
     }
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   return null;
 }
