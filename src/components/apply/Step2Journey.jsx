@@ -1,4 +1,21 @@
+import { useState } from "react";
+
+const MAX_HEADSHOT_MB = 4;
+const MAX_RESUME_MB = 4;
+
 export default function Step2Journey({ formData, updateFormData, nextStep, prevStep }) {
+    const [fileErrors, setFileErrors] = useState({ headshot: "", resume: "" });
+
+    const handleFileChange = (field, file, maxMB) => {
+        if (!file) return;
+        if (file.size > maxMB * 1024 * 1024) {
+            setFileErrors(prev => ({ ...prev, [field]: `File is too large. Maximum size is ${maxMB}MB. Your file is ${(file.size / 1024 / 1024).toFixed(1)}MB.` }));
+            return;
+        }
+        setFileErrors(prev => ({ ...prev, [field]: "" }));
+        updateFormData(field, file);
+    };
+
     const handleCauseChange = (cause) => {
         const currentCauses = [...formData.socialCauses];
         if (currentCauses.includes(cause)) {
@@ -128,10 +145,12 @@ export default function Step2Journey({ formData, updateFormData, nextStep, prevS
                                             <div className="flex flex-col items-center justify-center pt-2 pb-2">
                                                 <p className="text-sm font-bold text-gray-500"><span className="text-gray-800">Choose File</span> No file chosen</p>
                                             </div>
-                                            <input type="file" className="hidden" onChange={(e) => updateFormData("headshot", e.target.files[0])} accept="image/*" />
+                                            <input type="file" className="hidden" onChange={(e) => handleFileChange("headshot", e.target.files[0], MAX_HEADSHOT_MB)} accept="image/*" />
                                         </label>
                                     </div>
-                                    {formData.headshot && <p className="text-sm text-accent font-bold mt-2">{formData.headshot.name} uploaded.</p>}
+                                    <p className="text-xs text-gray-500 mt-2">Image format – Max file size: {MAX_HEADSHOT_MB}MB</p>
+                                    {fileErrors.headshot && <p className="text-sm text-red-600 font-medium mt-1">{fileErrors.headshot}</p>}
+                                    {!fileErrors.headshot && formData.headshot && <p className="text-sm text-accent font-bold mt-2">{formData.headshot.name} uploaded.</p>}
                                 </div>
 
                                 <div>
@@ -143,11 +162,12 @@ export default function Step2Journey({ formData, updateFormData, nextStep, prevS
                                             <div className="flex flex-col items-center justify-center pt-2 pb-2">
                                                 <p className="text-sm font-bold text-gray-500"><span className="text-gray-800">Choose File</span> No file chosen</p>
                                             </div>
-                                            <input type="file" className="hidden" onChange={(e) => updateFormData("resume", e.target.files[0])} accept=".pdf,.doc,.docx,.rtf,.txt,.jpg,.jpeg,.png" />
+                                            <input type="file" className="hidden" onChange={(e) => handleFileChange("resume", e.target.files[0], MAX_RESUME_MB)} accept=".pdf,.doc,.docx,.rtf,.txt,.jpg,.jpeg,.png" />
                                         </label>
                                     </div>
-                                    <p className="text-xs text-gray-500 mt-2">PDF, DOCX, TXT, or Image format – Max file size: 5MB</p>
-                                    {formData.resume && <p className="text-sm text-accent font-bold mt-2">{formData.resume.name} uploaded.</p>}
+                                    <p className="text-xs text-gray-500 mt-2">PDF, DOCX, TXT, or Image format – Max file size: {MAX_RESUME_MB}MB</p>
+                                    {fileErrors.resume && <p className="text-sm text-red-600 font-medium mt-1">{fileErrors.resume}</p>}
+                                    {!fileErrors.resume && formData.resume && <p className="text-sm text-accent font-bold mt-2">{formData.resume.name} uploaded.</p>}
                                 </div>
                             </div>
 
