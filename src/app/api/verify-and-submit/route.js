@@ -38,7 +38,7 @@ export async function POST(request) {
         const order = await orderRes.json();
         console.log("[verify] order state:", order.state, "id:", orderId);
 
-        if (order.state !== "COMPLETED") {
+        if (order.state?.toLowerCase() !== "completed") {
             return Response.json({ success: false, error: `Payment not completed. State: ${order.state}` }, { status: 402 });
         }
 
