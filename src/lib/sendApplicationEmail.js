@@ -50,25 +50,7 @@ async function appendToSheet(sheetId, row) {
 }
 
 /**
- * Send application email + log to Google Sheets.
- *
- * @param {object} data - Application fields
- * @param {string} data.name
- * @param {string} data.email
- * @param {string} data.phone
- * @param {string} data.city
- * @param {string} data.nationality
- * @param {string} data.passportNumber
- * @param {string} data.dob
- * @param {string} data.gender
- * @param {string} data.isStudent
- * @param {string} data.hasVolunteerExp
- * @param {string} data.organizations
- * @param {string} data.statementOfPurpose
- * @param {string} data.socialCauses
- * @param {Array}  data.attachments - nodemailer attachment objects { filename, content, contentType }
- * @param {boolean} data.headshotAttached
- * @param {boolean} data.resumeAttached
+ * Send application email + confirmation to applicant + log to Google Sheets.
  */
 export async function sendApplicationEmail(data) {
     const {
@@ -84,6 +66,35 @@ export async function sendApplicationEmail(data) {
     }
 
     const transporter = getTransporter();
+
+    // ── Confirmation email to applicant ───────────────────────────────────
+    await transporter.sendMail({
+        from: `"CSYGA" <${process.env.GMAIL_USER}>`,
+        to: email,
+        subject: "Your Application Has Been Received — CSYGA Digital Diplomacy Summit 2026",
+        html: `
+            <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#111;">
+                <div style="background:#195eb3;padding:24px 32px;border-radius:8px 8px 0 0;">
+                    <h1 style="color:#fff;margin:0;font-size:22px;">Application Received!</h1>
+                </div>
+                <div style="border:1px solid #e0e0e0;border-top:none;border-radius:0 0 8px 8px;padding:32px;">
+                    <p style="font-size:16px;">Dear <strong>${name}</strong>,</p>
+                    <p>Thank you for applying to the <strong>Digital Diplomacy Summit 2026</strong> — Istanbul Fully Funded Scholarship programme. Your application and payment have been successfully received.</p>
+                    <div style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:16px;margin:20px 0;">
+                        <strong>✅ Application confirmed</strong><br/>
+                        <span style="color:#555;font-size:14px;">Our team will review your application and be in touch within 5–7 business days.</span>
+                    </div>
+                    <p style="color:#555;font-size:14px;">If you have any questions in the meantime, feel free to reply to this email or contact us at <a href="mailto:info@csyga.org" style="color:#195eb3;">info@csyga.org</a>.</p>
+                    <p style="color:#555;font-size:14px;margin-top:28px;">Best regards,<br/><strong>The CSYGA Team</strong></p>
+                    <hr style="border:none;border-top:1px solid #e0e0e0;margin:24px 0;"/>
+                    <p style="color:#aaa;font-size:11px;">CENTER FOR STRATEGIC YOUTH AND GLOBAL AFFAIRS LTD · Northampton, United Kingdom</p>
+                </div>
+            </div>
+        `,
+    });
+    console.log("[email] confirmation sent to applicant:", email);
+
+    // ── Internal notification email to admin ──────────────────────────────
     await transporter.sendMail({
         from: `"CSYGA Applications" <${process.env.GMAIL_USER}>`,
         to: process.env.GMAIL_USER,
@@ -136,7 +147,7 @@ export async function sendApplicationEmail(data) {
         attachments,
     });
 
-    console.log("[email] sent successfully to", process.env.GMAIL_USER);
+    console.log("[email] admin notification sent to", process.env.GMAIL_USER);
 
     if (isGoogleConfigured()) {
         try {
