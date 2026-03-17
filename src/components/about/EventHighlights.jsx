@@ -21,7 +21,13 @@ export default function EventHighlights() {
                                     src={item.image}
                                     alt={item.title}
                                     fill
-                                    className="object-cover transform group-hover:scale-110 transition-transform duration-500"
+                                    className={`object-cover transform group-hover:scale-110 transition-transform duration-500 ${
+                                        idx === 0
+                                            ? "object-[center_28%] md:object-[center_24%] lg:object-[center_20%]"
+                                            : idx === 1
+                                              ? "object-[center_50%] md:object-[center_52%] lg:object-[center_53%]"
+                                              : "object-[center_32%] md:object-[center_28%] lg:object-[center_24%]"
+                                    }`}
                                 />
                             </div>
                             <div className="p-6 flex-grow">
