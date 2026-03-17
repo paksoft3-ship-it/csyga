@@ -443,7 +443,7 @@ export default function EventsPage() {
               </p>
             </div>
             <div className="relative h-72 md:h-96 rounded-3xl overflow-hidden border border-gray-100 shadow-lg">
-              <Image src="/images/4.jpg" alt="Istanbul summit backdrop" fill className="object-cover" />
+              <Image src="/DigitalDiplomacySummit2026.jpeg" alt="Istanbul summit backdrop" fill className="object-cover object-top" />
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@ export default function PageHeader({ title, badge, description, bgImage }) {
                     alt={title}
                     fill
                     priority
-                    className="object-cover object-center scale-[1.04]"
+                    className="object-cover object-top scale-[1.04]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-background-dark/95 via-primary/70 to-accent/40 z-10"></div>
                 <div className="absolute inset-0 bg-gradient-to-t from-background-dark/95 via-transparent to-background-dark/30 z-20"></div>

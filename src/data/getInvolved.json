@@ -3,7 +3,7 @@
         "header": {
             "title": "Join Our Global Movement",
             "description": "Discover opportunities to contribute your talents, develop new skills, and make an impact on the world stage.",
-            "bgImage": "/images/4.jpg"
+            "bgImage": "/DigitalDiplomacySummit2026.jpeg"
         },
         "opportunities": {
             "title": "Opportunities for Engagement",
@@ -14,7 +14,7 @@
                     "title": "Youth Delegate Program",
                     "description": "Join our flagship program for young leaders aged 18-30. Participate in international conferences, diplomatic simulations, and policy development processes.",
                     "icon": "school",
-                    "image": "/images/4.jpg",
+                    "image": "/DigitalDiplomacySummit2026.jpeg",
                     "bullets": [
                         "Mentorship from senior diplomats",
                         "Access to global networks",
@@ -64,7 +64,7 @@
         "header": {
             "title": "Connect With Us",
             "description": "Reach out to collaborate, ask questions, or learn more about our initiatives. We're here to engage with you.",
-            "bgImage": "/images/4.jpg"
+            "bgImage": "/DigitalDiplomacySummit2026.jpeg"
         },
         "contact": {
             "title": "Get In Touch",

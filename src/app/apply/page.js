@@ -7,7 +7,7 @@ export default function ApplyPage() {
             <PageHeader
                 title="Apply Now"
                 description="Digital Diplomacy Summit 2026 Application"
-                bgImage="/images/4.jpg"
+                bgImage="/DigitalDiplomacySummit2026.jpeg"
             />
             <section className="py-16 bg-white min-h-screen">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
