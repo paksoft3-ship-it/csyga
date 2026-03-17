@@ -5,7 +5,7 @@ import CorePillars from "@/components/about/CorePillars";
 import WhyCsyga from "@/components/about/WhyCsyga";
 import GlobalFootprint from "@/components/about/GlobalFootprint";
 import EventHighlights from "@/components/about/EventHighlights";
-import LeadershipGovernance from "@/components/about/LeadershipGovernance";
+// import LeadershipGovernance from "@/components/about/LeadershipGovernance";
 import AboutPartnersSlider from "@/components/about/AboutPartnersSlider";
 import aboutData from "@/data/about.json";
 
@@ -26,7 +26,7 @@ export default function AboutPage() {
             <WhyCsyga />
             <GlobalFootprint />
             <EventHighlights />
-            <LeadershipGovernance />
+            {/* <LeadershipGovernance /> */}
             <AboutPartnersSlider />
         </>
     );
