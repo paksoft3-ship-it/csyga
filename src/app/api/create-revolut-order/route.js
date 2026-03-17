@@ -25,6 +25,7 @@ export async function POST(request) {
         const socialCauses       = formData.get("socialCauses")      || "";
         const headshotFile       = formData.get("headshot");
         const resumeFile         = formData.get("resume");
+        const plan               = formData.get("plan") || "";
 
         const pendingId = randomUUID();
 
@@ -64,6 +65,7 @@ export async function POST(request) {
             isStudent, hasVolunteerExp, organizations, statementOfPurpose, socialCauses,
             headshotUrl, headshotName,
             resumeUrl, resumeName,
+            plan,
             createdAt: Date.now(),
         };
 
@@ -79,10 +81,16 @@ export async function POST(request) {
                 "Revolut-Api-Version": "2024-09-01",
             },
             body: JSON.stringify({
-                amount: 999,           // $9.99 in cents
+                amount: plan === "installment" ? 10000 : plan === "access" ? 40000 : plan === "experience" ? 70000 : 999,
                 currency: "USD",
                 merchant_order_ext_ref: pendingId,
-                description: "Digital Diplomacy Summit 2026 — Istanbul Fully Funded Scholarship",
+                description: plan === "installment"
+                    ? "Digital Diplomacy Summit 2026 — Progressive Enrollment Plan (Step 1)"
+                    : plan === "access"
+                    ? "Digital Diplomacy Summit 2026 — Summit Access Pass"
+                    : plan === "experience"
+                    ? "Digital Diplomacy Summit 2026 — Complete Summit Experience"
+                    : "Digital Diplomacy Summit 2026 — Istanbul Fully Funded Scholarship",
             }),
         });
 

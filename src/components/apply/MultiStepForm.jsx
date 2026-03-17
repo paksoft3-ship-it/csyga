@@ -6,7 +6,7 @@ import Step3Terms from "./Step3Terms";
 import Step4Payment from "./Step4Payment";
 import Stepper from "./Stepper";
 
-export default function MultiStepForm() {
+export default function MultiStepForm({ plan = "" }) {
     const [currentStep, setCurrentStep] = useState(1);
     const totalSteps = 4;
 
@@ -52,12 +52,14 @@ export default function MultiStepForm() {
                         onProceed={nextStep}
                         submitting={false}
                         submitError=""
+                        plan={plan}
                     />
                 )}
                 {currentStep === 4 && (
                     <Step4Payment
                         prevStep={prevStep}
                         formData={formData}
+                        plan={plan}
                     />
                 )}
             </form>

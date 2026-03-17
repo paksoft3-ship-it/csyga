@@ -95,6 +95,7 @@ const participationCategories = [
     notes: [],
     cta: "Apply Now",
     tone: "neutral",
+    link: "/apply?plan=installment",
   },
   {
     title: "Summit Access Pass - $400",
@@ -109,6 +110,7 @@ const participationCategories = [
     notes: [],
     cta: "Apply Now",
     tone: "primary",
+    link: "/apply?plan=access",
   },
   {
     title: "Complete Summit Experience - $700",
@@ -125,6 +127,7 @@ const participationCategories = [
     notes: [],
     cta: "Apply Now",
     tone: "accent",
+    link: "/apply?plan=experience",
   },
 ];
 
@@ -548,7 +551,7 @@ export default function EventsPage() {
                   </div>
 
                   <div className="mt-6">
-                    <Link href="/apply" className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold transition-colors ${styles.button}`}>
+                    <Link href={category.link || "/apply"} className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold transition-colors ${styles.button}`}>
                       {category.cta}
                       <span className="material-symbols-outlined">arrow_forward</span>
                     </Link>

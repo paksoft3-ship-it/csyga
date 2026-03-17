@@ -1,4 +1,9 @@
-export default function Step3Terms({ formData, updateFormData, prevStep, onProceed, submitting, submitError }) {
+export default function Step3Terms({ formData, updateFormData, prevStep, onProceed, submitting, submitError, plan }) {
+    const isInstallment = plan === "installment";
+    const isAccess = plan === "access";
+    const isExperience = plan === "experience";
+    const fee = isInstallment ? "$100 USD" : isAccess ? "$400 USD" : isExperience ? "$700 USD" : "$9.99 USD";
+
     return (
         <div className="space-y-8 animate-fade-in">
             <div>
@@ -16,7 +21,7 @@ export default function Step3Terms({ formData, updateFormData, prevStep, onProce
                     <p>1.4. Selected participants are required to confirm their attendance within the given timeframe. Failure to confirm may result in forfeiture of the Fully Funded benefit.</p>
 
                     <h4 className="font-bold text-gray-900">2. Non-Refundable Application Fee</h4>
-                    <p>2.1. Applicants under the Fully Funded Category are required to pay an application processing fee of <strong>$9.99 USD</strong> as part of the submission process.</p>
+                    <p>2.1. Applicants are required to pay an application processing fee of <strong>{fee}</strong> as part of the submission process.</p>
                     <p>2.2. The application fee is <strong>non-refundable under any circumstances</strong>, including but not limited to:</p>
                     <ul className="list-disc pl-5 space-y-1">
                         <li>Failure to be selected for the Fully Funded Category</li>
@@ -44,10 +49,10 @@ export default function Step3Terms({ formData, updateFormData, prevStep, onProce
                         <span className="material-symbols-outlined text-amber-500 text-[22px] shrink-0 mt-0.5">payments</span>
                         <div>
                             <p className="text-sm font-black text-amber-800">
-                                Non-Refundable Application Processing Fee: <span className="text-lg">$9.99 USD</span>
+                                Non-Refundable Application Processing Fee: <span className="text-lg">{fee}</span>
                             </p>
                             <p className="text-xs text-amber-700 mt-1 leading-relaxed">
-                                A one-time, non-refundable application fee of <strong>$9.99 USD</strong> is required to complete your submission. This fee covers administrative and processing costs and is not a guarantee of selection.
+                                A one-time, non-refundable application fee of <strong>{fee}</strong> is required to complete your submission. This fee covers administrative and processing costs and is not a guarantee of selection.
                             </p>
                         </div>
                     </div>
@@ -64,7 +69,7 @@ export default function Step3Terms({ formData, updateFormData, prevStep, onProce
                             onChange={(e) => updateFormData("agreeTerms", e.target.checked)}
                         />
                         <span className="text-sm text-gray-700 leading-relaxed font-bold">
-                            By clicking the &apos;Proceed to Payment&apos; button below, you acknowledge that you have read, understood, and agree to abide by the above Terms and Conditions, including the non-refundable $9.99 USD application fee.
+                            By clicking the &apos;Proceed to Payment&apos; button below, you acknowledge that you have read, understood, and agree to abide by the above Terms and Conditions, including the non-refundable {fee} application fee.
                         </span>
                     </label>
                 </div>

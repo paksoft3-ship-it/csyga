@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 function loadRevolutSDK() {
@@ -13,9 +13,13 @@ function loadRevolutSDK() {
     });
 }
 
-export default function Step4Payment({ prevStep, formData }) {
+export default function Step4Payment({ prevStep, formData, plan }) {
     const router = useRouter();
-    // status: idle | preparing | paying | submitting
+    const isInstallment = plan === "installment";
+    const isAccess = plan === "access";
+    const isExperience = plan === "experience";
+    const displayAmount = isInstallment ? "$100" : isAccess ? "$400" : isExperience ? "$700" : "$9.99";
+
     const [status, setStatus] = useState("idle");
     const [errorMsg, setErrorMsg] = useState("");
 
@@ -45,6 +49,7 @@ export default function Step4Payment({ prevStep, formData }) {
             );
             if (formData.headshot) payload.append("headshot", formData.headshot);
             if (formData.resume)   payload.append("resume",   formData.resume);
+            payload.append("plan", plan || "");
 
             const res = await fetch("/api/create-revolut-order", {
                 method: "POST",
@@ -69,7 +74,6 @@ export default function Step4Payment({ prevStep, formData }) {
                 onSuccess: async () => {
                     setStatus("submitting");
                     try {
-                        // Verify order + trigger email + Sheets logging
                         const vRes = await fetch("/api/verify-and-submit", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
@@ -81,7 +85,6 @@ export default function Step4Payment({ prevStep, formData }) {
                         }
                         router.push("/apply/success");
                     } catch (err) {
-                        // Payment succeeded — show a recoverable error with instructions
                         setErrorMsg(
                             "Your payment was received but we had trouble submitting your application. " +
                             "Please contact us at info@csyga.org with your name and email."
@@ -117,14 +120,14 @@ export default function Step4Payment({ prevStep, formData }) {
             <div className="text-center">
                 <h2 className="text-2xl font-bold text-gray-900 mb-1">Complete Your Payment</h2>
                 <p className="text-gray-500 text-sm">
-                    Pay the $9.99 registration fee to finalise your application
+                    Pay the {displayAmount} {isInstallment ? "initial enrollment fee" : isAccess ? "summit access fee" : isExperience ? "summit experience fee" : "registration fee"} to finalise your application
                 </p>
             </div>
 
             {/* ── Step indicators ─────────────────────────────────────────────── */}
             <div className="max-w-md mx-auto flex items-center justify-center gap-0">
                 {[
-                    { icon: "payments", label: "Pay $9.99" },
+                    { icon: "payments", label: `Pay ${displayAmount}` },
                     { icon: "arrow_forward", arrow: true },
                     { icon: "send", label: "Submitted" },
                 ].map((item, i) =>
@@ -146,13 +149,18 @@ export default function Step4Payment({ prevStep, formData }) {
             {/* ── Payment card ─────────────────────────────────────────────────── */}
             <div className="max-w-md mx-auto bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-md">
                 <div className="px-6 pt-6 pb-4">
-                    <p className="text-2xl font-black text-gray-900">Pay $9.99</p>
+                    <p className="text-2xl font-black text-gray-900">Pay {displayAmount}</p>
                     <p className="text-sm text-gray-500 mt-0.5 font-medium">
                         To CENTER FOR STRATEGIC YOUTH AND GLOBAL AFFAIRS LTD
                     </p>
                     <p className="text-xs text-gray-400 mt-0.5 leading-snug">
-                        Digital Diplomacy Summit 2026 — Istanbul Fully Funded Scholarship
-                        (Early Access Registration)
+                        {isInstallment
+                            ? "Digital Diplomacy Summit 2026 — Progressive Enrollment Plan (Step 1)"
+                            : isAccess
+                            ? "Digital Diplomacy Summit 2026 — Summit Access Pass"
+                            : isExperience
+                            ? "Digital Diplomacy Summit 2026 — Complete Summit Experience"
+                            : "Digital Diplomacy Summit 2026 — Istanbul Fully Funded Scholarship (Early Access Registration)"}
                     </p>
                 </div>
 
