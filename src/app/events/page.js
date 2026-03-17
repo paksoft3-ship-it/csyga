@@ -12,18 +12,21 @@ const summitThemes = [
     description:
       "Technology-driven humanitarian response, digital protection systems, negotiation in fragile contexts, and multi-stakeholder coordination in crisis environments.",
     icon: "public",
+    image: "/diplomacySimulations.jpeg",
   },
   {
     title: "Crisis Diplomacy & Global Stability",
     description:
       "Strategic negotiation, emergency governance frameworks, digital governance in conflict settings, and crisis communication in high-risk scenarios.",
     icon: "shield",
+    image: "/workshop.jpeg",
   },
   {
     title: "Technology, Youth & Climate Nexus",
     description:
       "AI in humanitarian action, youth-led diplomacy, digital ethics, climate-induced displacement, and innovation-driven global cooperation.",
     icon: "eco",
+    image: "/YouthAndCivilSocity.jpeg",
   },
 ];
 
@@ -60,6 +63,7 @@ const participationCategories = [
     ],
     cta: "Apply Now",
     tone: "primary",
+    image: "/images/1.jpg",
   },
   {
     title: "Free Summit Access Pass",
@@ -78,6 +82,7 @@ const participationCategories = [
     ],
     cta: "Apply Now",
     tone: "accent",
+    image: "/images/2.jpg",
   },
   {
     title: "Progressive Enrollment Plan (Installment Model)",
@@ -95,6 +100,7 @@ const participationCategories = [
     notes: [],
     cta: "Apply Now",
     tone: "neutral",
+    image: "/images/3.jpg",
   },
   {
     title: "Summit Access Pass - $400",
@@ -109,6 +115,7 @@ const participationCategories = [
     notes: [],
     cta: "Apply Now",
     tone: "primary",
+    image: "/images/4.jpg",
   },
   {
     title: "Complete Summit Experience - $700",
@@ -125,6 +132,7 @@ const participationCategories = [
     notes: [],
     cta: "Apply Now",
     tone: "accent",
+    image: "/images/5.jpg",
   },
 ];
 
@@ -454,12 +462,17 @@ export default function EventsPage() {
           <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-10">Summit Themes</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {summitThemes.map((theme) => (
-              <div key={theme.title} className="rounded-2xl bg-white border border-gray-100 p-7 shadow-sm">
-                <div className="size-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5">
-                  <span className="material-symbols-outlined">{theme.icon}</span>
+              <div key={theme.title} className="rounded-2xl bg-white border border-gray-100 shadow-sm overflow-hidden">
+                <div className="relative w-full h-48">
+                  <Image src={theme.image} alt={theme.title} fill className="object-cover" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{theme.title}</h3>
-                <p className="text-gray-600">{theme.description}</p>
+                <div className="p-7">
+                  <div className="size-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5">
+                    <span className="material-symbols-outlined">{theme.icon}</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{theme.title}</h3>
+                  <p className="text-gray-600">{theme.description}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -467,35 +480,51 @@ export default function EventsPage() {
       </section>
 
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12">
-          <div>
-            <h2 className="text-3xl font-black text-gray-900 mb-5">Institutional Visits</h2>
-            <p className="text-gray-600 mb-6">
-              Delegates will visit key organizations in Turkiye involved in:
-            </p>
-            <ul className="space-y-3">
-              {institutionalVisitAreas.map((item) => (
-                <li key={item} className="flex items-start gap-2 text-gray-700">
-                  <span className="material-symbols-outlined text-accent mt-0.5">check_circle</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-10">Institutional Visits & Field Experience</h2>
 
-          <div>
-            <h2 className="text-3xl font-black text-gray-900 mb-5">Cultural & Field Experience</h2>
-            <div className="rounded-2xl border border-gray-100 bg-background-light p-6 mb-4">
-              <h3 className="font-bold text-gray-900 mb-2">Humanitarian Field Exposure</h3>
-              <p className="text-gray-600">
-                Learn how organizations use digital tools in real-time humanitarian decision-making.
-              </p>
+          {/* Top row: large institutional visits card + two stacked cultural cards */}
+          <div className="grid lg:grid-cols-5 gap-4">
+
+            {/* Institutional Visits — large card with image background */}
+            <div className="lg:col-span-3 relative rounded-3xl overflow-hidden h-96 lg:h-[480px]">
+              <Image src="/NewDeplomacyConference.jpeg" alt="Institutional Visits" fill className="object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+              <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 border border-white/30 text-white text-xs font-bold uppercase tracking-wide w-fit mb-4">
+                  <span className="material-symbols-outlined text-sm">location_city</span>
+                  Istanbul, Turkiye
+                </span>
+                <h3 className="text-2xl font-black text-white mb-4">Institutional Visits</h3>
+                <ul className="space-y-2">
+                  {institutionalVisitAreas.map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-white/90 text-sm">
+                      <span className="material-symbols-outlined text-accent text-base shrink-0">check_circle</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <div className="rounded-2xl border border-gray-100 bg-background-light p-6">
-              <h3 className="font-bold text-gray-900 mb-2">Istanbul City Tour</h3>
-              <p className="text-gray-600">
-                Explore historic diplomatic quarters and global heritage landmarks.
-              </p>
+
+            {/* Two cultural cards stacked */}
+            <div className="lg:col-span-2 grid grid-rows-2 gap-4">
+              <div className="relative rounded-3xl overflow-hidden h-56 lg:h-auto">
+                <Image src="/diplomacySimulations.jpeg" alt="Humanitarian Field Exposure" fill className="object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                <div className="absolute inset-0 p-6 flex flex-col justify-end">
+                  <h3 className="text-lg font-black text-white">Humanitarian Field Exposure</h3>
+                  <p className="text-white/80 text-sm mt-1">Digital tools in real-time humanitarian decision-making.</p>
+                </div>
+              </div>
+              <div className="relative rounded-3xl overflow-hidden h-56 lg:h-auto">
+                <Image src="/DynamicExchange.jpeg" alt="Istanbul City Tour" fill className="object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                <div className="absolute inset-0 p-6 flex flex-col justify-end">
+                  <h3 className="text-lg font-black text-white">Istanbul City Tour</h3>
+                  <p className="text-white/80 text-sm mt-1">Historic diplomatic quarters and global heritage landmarks.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -503,14 +532,36 @@ export default function EventsPage() {
 
       <section className="py-20 bg-background-light">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-black text-gray-900 mb-6">Networking & Engagement</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            {networkingHighlights.map((item) => (
-              <div key={item} className="bg-white border border-gray-100 rounded-2xl p-5 flex items-start gap-3">
-                <span className="material-symbols-outlined text-primary mt-0.5">groups</span>
-                <span className="text-gray-700">{item}</span>
+          <h2 className="text-3xl font-black text-gray-900 mb-8">Networking & Engagement</h2>
+
+          {/* Mosaic: large image on left with text overlay, 2x2 grid on right */}
+          <div className="grid lg:grid-cols-5 gap-4">
+
+            {/* Large card with highlights overlay */}
+            <div className="lg:col-span-3 relative rounded-3xl overflow-hidden h-80 lg:h-[420px]">
+              <Image src="/Gallery/2.jpeg" alt="Networking at summit" fill className="object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
+              <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                <h3 className="text-2xl font-black text-white mb-4">Connect. Collaborate. Lead.</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {networkingHighlights.map((item) => (
+                    <div key={item} className="flex items-center gap-2 text-white/90 text-sm">
+                      <span className="material-symbols-outlined text-accent text-base shrink-0">groups</span>
+                      {item}
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
+            </div>
+
+            {/* 2x2 photo grid */}
+            <div className="lg:col-span-2 grid grid-cols-2 gap-4">
+              {["/Gallery/3.jpeg", "/Gallery/4.jpeg", "/Gallery/5.jpeg", "/Gallery/whatsapp-2026-03-04.jpeg"].map((src, i) => (
+                <div key={i} className="relative rounded-2xl overflow-hidden h-44 lg:h-48">
+                  <Image src={src} alt={`Summit moment ${i + 1}`} fill className="object-cover" />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -522,36 +573,49 @@ export default function EventsPage() {
             {participationCategories.map((category) => {
               const styles = categoryClasses(category.tone);
               return (
-                <div key={category.title} className="border border-gray-100 rounded-3xl p-7 bg-background-light">
-                  <span className={`inline-flex px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide ${styles.badge}`}>
-                    {category.subtitle}
-                  </span>
-                  <h3 className="text-2xl font-black text-gray-900 mt-4">{category.title}</h3>
-                  <p className="text-gray-600 mt-3">{category.body}</p>
-
-                  <div className="mt-5 grid md:grid-cols-2 gap-6">
-                    <ul className="space-y-2">
-                      {category.includes.map((inc) => (
-                        <li key={inc} className="flex items-start gap-2 text-gray-700">
-                          <span className="material-symbols-outlined text-accent text-base mt-0.5">check_circle</span>
-                          <span>{inc}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <div>
-                      {category.notes.map((note) => (
-                        <p key={note} className="text-sm text-gray-600 mb-2">
-                          {note}
-                        </p>
-                      ))}
-                    </div>
+                <div key={category.title} className="border border-gray-100 rounded-3xl overflow-hidden bg-background-light flex flex-col md:flex-row">
+                  {/* Image */}
+                  <div className="relative w-full md:w-72 lg:w-80 shrink-0 h-56 md:h-auto">
+                    <Image src={category.image} alt={category.title} fill className="object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent md:bg-gradient-to-r md:from-transparent md:to-black/10" />
                   </div>
 
-                  <div className="mt-6">
-                    <Link href="/apply" className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold transition-colors ${styles.button}`}>
-                      {category.cta}
-                      <span className="material-symbols-outlined">arrow_forward</span>
-                    </Link>
+                  {/* Content */}
+                  <div className="flex-1 p-7 flex flex-col justify-between">
+                    <div>
+                      <span className={`inline-flex px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide ${styles.badge}`}>
+                        {category.subtitle}
+                      </span>
+                      <h3 className="text-2xl font-black text-gray-900 mt-4">{category.title}</h3>
+                      <p className="text-gray-600 mt-3">{category.body}</p>
+
+                      <div className="mt-5 grid sm:grid-cols-2 gap-6">
+                        <ul className="space-y-2">
+                          {category.includes.map((inc) => (
+                            <li key={inc} className="flex items-start gap-2 text-gray-700">
+                              <span className="material-symbols-outlined text-accent text-base mt-0.5">check_circle</span>
+                              <span>{inc}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        {category.notes.length > 0 && (
+                          <div className="space-y-2">
+                            {category.notes.map((note) => (
+                              <p key={note} className="text-sm text-gray-500 bg-white rounded-xl px-4 py-3 border border-gray-100">
+                                {note}
+                              </p>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="mt-6">
+                      <Link href="/apply" className={`inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold transition-colors ${styles.button}`}>
+                        {category.cta}
+                        <span className="material-symbols-outlined">arrow_forward</span>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               );
@@ -608,6 +672,30 @@ export default function EventsPage() {
                 isOpen={openFaq === idx}
                 onToggle={() => setOpenFaq(openFaq === idx ? -1 : idx)}
               />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-background-light">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-10">Past Events</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { title: "New Diplomacy Conference 2025", date: "Dec 6, 2025", location: "Istanbul", image: "/NewDeplomacyConference.jpeg" },
+              { title: "Intercultural Communication in the Modern World", date: "Jan 17, 2026", location: "Istanbul", image: "/DynamicExchange.jpeg" },
+              { title: "Borders and Brinkmanship", date: "Nov 5, 2025", location: "Taksim Mosque", image: "/BordersAndBrinkManship.jpeg" },
+              { title: "Youth & Civil Society in Resolving Conflicts", date: "Aug 4, 2025", location: "UDEF HQ", image: "/YouthAndCivilSocity.jpeg" },
+            ].map((event) => (
+              <div key={event.title} className="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm">
+                <div className="relative w-full h-48">
+                  <Image src={event.image} alt={event.title} fill className="object-cover" />
+                </div>
+                <div className="p-5">
+                  <p className="text-xs text-primary font-bold uppercase tracking-wide">{event.date} · {event.location}</p>
+                  <h3 className="text-base font-bold text-gray-900 mt-1 leading-snug">{event.title}</h3>
+                </div>
+              </div>
             ))}
           </div>
         </div>
