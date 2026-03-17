@@ -82,7 +82,7 @@ export async function sendApplicationEmail(data) {
                     <p>Thank you for applying to the <strong>Digital Diplomacy Summit 2026</strong> — Istanbul Fully Funded Scholarship programme. Your application and payment have been successfully received.</p>
                     <div style="background:#e8f5e9;border:1px solid #a5d6a7;border-radius:8px;padding:16px;margin:20px 0;">
                         <strong>✅ Application confirmed</strong><br/>
-                        <span style="color:#555;font-size:14px;">Our team will review your application and be in touch within 5–7 business days.</span>
+                        <span style="color:#555;font-size:14px;">Our team will review your application and results will be announced after application deadline.</span>
                     </div>
                     <p style="color:#555;font-size:14px;">If you have any questions in the meantime, feel free to reply to this email or contact us at <a href="mailto:info@csyga.org" style="color:#195eb3;">info@csyga.org</a>.</p>
                     <p style="color:#555;font-size:14px;margin-top:28px;">Best regards,<br/><strong>The CSYGA Team</strong></p>

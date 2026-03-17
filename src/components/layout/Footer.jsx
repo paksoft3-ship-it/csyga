@@ -1,8 +1,33 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import siteData from "@/data/site.json";
+import { useState } from "react";
 
 export default function Footer() {
+    const [subEmail, setSubEmail] = useState("");
+    const [subStatus, setSubStatus] = useState("idle"); // idle | loading | success | error
+    const [subError, setSubError] = useState("");
+
+    const handleSubscribe = async (e) => {
+        e.preventDefault();
+        setSubStatus("loading");
+        setSubError("");
+        try {
+            const res = await fetch("/api/subscribe", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: subEmail }),
+            });
+            const data = await res.json();
+            if (!res.ok || !data.success) throw new Error(data.error || "Something went wrong.");
+            setSubStatus("success");
+            setSubEmail("");
+        } catch (err) {
+            setSubError(err.message);
+            setSubStatus("error");
+        }
+    };
     return (
         <footer className="bg-[#0e141b] text-white pt-1">
             <div className="h-1.5 w-full bg-gradient-to-r from-primary via-blue-400 to-accent"></div>
@@ -75,10 +100,30 @@ export default function Footer() {
                     <div>
                         <h4 className="text-lg font-bold mb-6">Stay Connected</h4>
                         <p className="text-gray-400 text-sm mb-4">Subscribe to our newsletter for the latest strategic insights.</p>
-                        <form className="flex flex-col gap-3">
-                            <input className="w-full bg-white/5 border border-gray-700 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-primary text-white placeholder-gray-500" placeholder="Email address" type="email" />
-                            <button className="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition-colors text-sm">Subscribe</button>
-                        </form>
+                        {subStatus === "success" ? (
+                            <div className="bg-green-500/10 border border-green-500/30 rounded-lg px-4 py-3 text-green-400 text-sm">
+                                ✅ You're subscribed! Check your inbox for a confirmation.
+                            </div>
+                        ) : (
+                            <form className="flex flex-col gap-3" onSubmit={handleSubscribe}>
+                                <input
+                                    className="w-full bg-white/5 border border-gray-700 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-primary text-white placeholder-gray-500"
+                                    placeholder="Email address"
+                                    type="email"
+                                    value={subEmail}
+                                    onChange={(e) => setSubEmail(e.target.value)}
+                                    required
+                                />
+                                {subError && <p className="text-red-400 text-xs">{subError}</p>}
+                                <button
+                                    type="submit"
+                                    disabled={subStatus === "loading"}
+                                    className="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition-colors text-sm disabled:opacity-60"
+                                >
+                                    {subStatus === "loading" ? "Subscribing…" : "Subscribe"}
+                                </button>
+                            </form>
+                        )}
                     </div>
 
                 </div>
