@@ -74,9 +74,9 @@
         "description": "Highlights from our past events and programs",
         "images": [
             {
-                "src": "/Gallery/2.jpeg",
-                "alt": "Delegates in conference hall",
-                "title": "New Diplomacy Conference 2025",
+                "src": "/DynamicExchange.jpeg",
+                "alt": "Participants seated in a roundtable discussion",
+                "title": "Dynamic Exchange Session",
                 "desc": "Delegates from 15+ countries"
             },
             {
@@ -98,15 +98,15 @@
                 "desc": ""
             },
             {
-                "src": "/Gallery/whatsapp-2026-03-04.jpeg",
-                "alt": "Participants in group networking moment",
-                "title": "Youth Networking Session",
+                "src": "/images/11.JPG",
+                "alt": "Speaker talking into a microphone during a panel session",
+                "title": "Panel Speaker",
                 "desc": ""
             },
             {
-                "src": "/images/1.jpg",
-                "alt": "Conference participants group image",
-                "title": "International Delegation",
+                "src": "/images/12.JPG",
+                "alt": "Two speakers presenting together at a podium",
+                "title": "Joint Presentation",
                 "desc": ""
             },
             {
@@ -116,9 +116,9 @@
                 "desc": ""
             },
             {
-                "src": "/images/3.jpg",
-                "alt": "Youth delegates in discussion",
-                "title": "Youth Dialogue Session",
+                "src": "/images/8.JPG",
+                "alt": "Group photo on stage during an intercultural communication event",
+                "title": "Stage Group Photo",
                 "desc": ""
             },
             {
@@ -128,9 +128,9 @@
                 "desc": ""
             },
             {
-                "src": "/images/6.jpg",
-                "alt": "Delegates collaborating",
-                "title": "Collaborative Diplomacy",
+                "src": "/images/9.JPG",
+                "alt": "Speaker presenting on stage to an audience",
+                "title": "Stage Presentation",
                 "desc": ""
             },
             {
@@ -152,9 +152,9 @@
                 "desc": ""
             },
             {
-                "src": "/images/5.jpg",
-                "alt": "Participants engaged in a live discussion",
-                "title": "Live Discussion Session",
+                "src": "/images/10.jpg",
+                "alt": "Audience member speaking during an event session",
+                "title": "Audience Interaction",
                 "desc": ""
             }
         ]
