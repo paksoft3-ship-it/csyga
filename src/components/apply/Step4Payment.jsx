@@ -18,7 +18,8 @@ export default function Step4Payment({ prevStep, formData, plan }) {
     const isInstallment = plan === "installment";
     const isAccess = plan === "access";
     const isExperience = plan === "experience";
-    const displayAmount = isInstallment ? "$100" : isAccess ? "$400" : isExperience ? "$700" : "$9.99";
+    const isTest = plan === "test";
+    const displayAmount = isInstallment ? "$100" : isAccess ? "$400" : isExperience ? "$700" : isTest ? "$0.05" : "$9.99";
 
     const [status, setStatus] = useState("idle");
     const [errorMsg, setErrorMsg] = useState("");
@@ -120,7 +121,7 @@ export default function Step4Payment({ prevStep, formData, plan }) {
             <div className="text-center">
                 <h2 className="text-2xl font-bold text-gray-900 mb-1">Complete Your Payment</h2>
                 <p className="text-gray-500 text-sm">
-                    Pay the {displayAmount} {isInstallment ? "initial enrollment fee" : isAccess ? "summit access fee" : isExperience ? "summit experience fee" : "registration fee"} to finalise your application
+                    Pay the {displayAmount} {isInstallment ? "initial enrollment fee" : isAccess ? "summit access fee" : isExperience ? "summit experience fee" : isTest ? "test payment" : "registration fee"} to finalise your application
                 </p>
             </div>
 
@@ -160,6 +161,8 @@ export default function Step4Payment({ prevStep, formData, plan }) {
                             ? "Digital Diplomacy Summit 2026 — Summit Access Pass"
                             : isExperience
                             ? "Digital Diplomacy Summit 2026 — Complete Summit Experience"
+                            : isTest
+                            ? "TEST PAYMENT — $0.05 (do not use in production)"
                             : "Digital Diplomacy Summit 2026 — Istanbul Fully Funded Scholarship (Early Access Registration)"}
                     </p>
                 </div>

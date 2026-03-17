@@ -81,7 +81,7 @@ export async function POST(request) {
                 "Revolut-Api-Version": "2024-09-01",
             },
             body: JSON.stringify({
-                amount: plan === "installment" ? 10000 : plan === "access" ? 40000 : plan === "experience" ? 70000 : 999,
+                amount: plan === "installment" ? 10000 : plan === "access" ? 40000 : plan === "experience" ? 70000 : plan === "test" ? 5 : 999,
                 currency: "USD",
                 merchant_order_ext_ref: pendingId,
                 description: plan === "installment"
@@ -90,6 +90,8 @@ export async function POST(request) {
                     ? "Digital Diplomacy Summit 2026 — Summit Access Pass"
                     : plan === "experience"
                     ? "Digital Diplomacy Summit 2026 — Complete Summit Experience"
+                    : plan === "test"
+                    ? "TEST PAYMENT — Digital Diplomacy Summit 2026"
                     : "Digital Diplomacy Summit 2026 — Istanbul Fully Funded Scholarship",
             }),
         });

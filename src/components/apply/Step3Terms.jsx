@@ -2,7 +2,8 @@ export default function Step3Terms({ formData, updateFormData, prevStep, onProce
     const isInstallment = plan === "installment";
     const isAccess = plan === "access";
     const isExperience = plan === "experience";
-    const fee = isInstallment ? "$100 USD" : isAccess ? "$400 USD" : isExperience ? "$700 USD" : "$9.99 USD";
+    const isTest = plan === "test";
+    const fee = isInstallment ? "$100 USD" : isAccess ? "$400 USD" : isExperience ? "$700 USD" : isTest ? "$0.05 USD" : "$9.99 USD";
 
     return (
         <div className="space-y-8 animate-fade-in">
