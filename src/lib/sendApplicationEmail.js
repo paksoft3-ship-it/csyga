@@ -87,7 +87,7 @@ export async function sendApplicationEmail(data) {
                     <p style="color:#555;font-size:14px;">If you have any questions in the meantime, feel free to reply to this email or contact us at <a href="mailto:info@csyga.org" style="color:#195eb3;">info@csyga.org</a>.</p>
                     <p style="color:#555;font-size:14px;margin-top:28px;">Best regards,<br/><strong>The CSYGA Team</strong></p>
                     <hr style="border:none;border-top:1px solid #e0e0e0;margin:24px 0;"/>
-                    <p style="color:#aaa;font-size:11px;">CENTER FOR STRATEGIC YOUTH AND GLOBAL AFFAIRS LTD · Northampton, United Kingdom</p>
+                    <p style="color:#aaa;font-size:11px;">CENTER FOR STRATEGIC YOUTH AND GLOBAL AFFAIRS LTD · Northampton, United Kingdom · Istanbul, Turkiye</p>
                 </div>
             </div>
         `,

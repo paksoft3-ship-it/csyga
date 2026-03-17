@@ -54,7 +54,7 @@ export default function Footer() {
                         <ul className="space-y-4 text-sm text-gray-400">
                             <li className="flex items-start gap-3">
                                 <span className="material-symbols-outlined text-primary mt-0.5">mail</span>
-                                <span>thecsyga@gmail.com</span>
+                                <span>thecsyga@gmail.com<br />info@csyga.org</span>
                             </li>
                             <li className="flex items-start gap-3">
                                 <span className="material-symbols-outlined text-primary mt-0.5">phone</span>
@@ -62,7 +62,11 @@ export default function Footer() {
                             </li>
                             <li className="flex items-start gap-3">
                                 <span className="material-symbols-outlined text-primary mt-0.5 flex-shrink-0">location_on</span>
-                                <span>Mehmet Akif Mah,<br />1. Muammer Aksoy Cad,<br />Bina 36, Daire 5,<br />Kucukcekmece, Istanbul</span>
+                                <span>Northampton, United Kingdom</span>
+                            </li>
+                            <li className="flex items-start gap-3">
+                                <span className="material-symbols-outlined text-primary mt-0.5 flex-shrink-0">location_on</span>
+                                <span>Istanbul, Turkiye</span>
                             </li>
                         </ul>
                     </div>

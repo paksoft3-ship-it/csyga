@@ -199,7 +199,7 @@ export default function Step4Payment({ prevStep, formData, plan }) {
 
                 <div className="border-t border-gray-100 px-6 py-3 bg-gray-50 text-center">
                     <p className="text-[11px] text-gray-400">
-                        Northampton, United Kingdom &nbsp;·&nbsp; Powered by{" "}
+                        Northampton, United Kingdom &nbsp;·&nbsp; Istanbul, Turkiye &nbsp;·&nbsp; Powered by{" "}
                         <span className="font-bold text-gray-600">Revolut</span> Business
                     </p>
                 </div>
