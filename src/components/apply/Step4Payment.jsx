@@ -88,7 +88,8 @@ export default function Step4Payment({ prevStep, formData, plan }) {
                     } catch (err) {
                         setErrorMsg(
                             "Your payment was received but we had trouble submitting your application. " +
-                            "Please contact us at info@csyga.org with your name and email."
+                            "Please contact us at info@csyga.org with your name and email.\n\n" +
+                            "Error details: " + (err.message || "Unknown error")
                         );
                         setStatus("idle");
                     }
@@ -212,7 +213,7 @@ export default function Step4Payment({ prevStep, formData, plan }) {
             {errorMsg && (
                 <div className="max-w-md mx-auto flex items-start gap-3 bg-red-50 border border-red-200 text-red-700 rounded-xl px-5 py-4 text-sm">
                     <span className="material-symbols-outlined text-[18px] mt-0.5 shrink-0">error</span>
-                    <span>{errorMsg}</span>
+                    <span style={{ whiteSpace: "pre-line" }}>{errorMsg}</span>
                 </div>
             )}
 
