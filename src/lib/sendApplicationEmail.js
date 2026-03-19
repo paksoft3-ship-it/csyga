@@ -66,16 +66,15 @@ export async function sendApplicationEmail(data) {
         throw new Error("Email service is not configured.");
     }
 
-    if (!email) {
-        throw new Error(`Applicant email is missing. name=${name}`);
-    }
-
     const transporter = getTransporter();
 
+    console.log("[email] sending to applicant:", email, "| admin:", process.env.GMAIL_USER);
+
     // ── Confirmation email to applicant ───────────────────────────────────
-    await transporter.sendMail({
-        from: `"CSYGA" <${process.env.GMAIL_USER}>`,
-        to: email,
+    if (email) {
+        await transporter.sendMail({
+            from: `"CSYGA" <${process.env.GMAIL_USER}>`,
+            to: email,
         subject: "Your Application Has Been Received — CSYGA Digital Diplomacy Summit 2026",
         html: `
             <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;color:#111;">
@@ -96,8 +95,11 @@ export async function sendApplicationEmail(data) {
                 </div>
             </div>
         `,
-    });
-    console.log("[email] confirmation sent to applicant:", email);
+        });
+        console.log("[email] confirmation sent to applicant:", email);
+    } else {
+        console.error("[email] skipping applicant email — email field is empty. name:", name);
+    }
 
     // ── Internal notification email to admin ──────────────────────────────
     await transporter.sendMail({

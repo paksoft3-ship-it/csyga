@@ -5,7 +5,6 @@ const REVOLUT_BASE = process.env.REVOLUT_MODE === "sandbox"
     ? "https://sandbox-merchant.revolut.com/api"
     : "https://merchant.revolut.com/api";
 
-
 export async function POST(request) {
     try {
         const { orderId, pendingId } = await request.json();
@@ -38,17 +37,20 @@ export async function POST(request) {
         // ── Look up pending application ────────────────────────────────────────
         const raw = await kv.get(`pending:${pendingId}`);
         if (!raw) {
-            // Webhook already processed this — still return success to the user
             console.log("[verify] pending app already processed:", pendingId);
             return Response.json({ success: true, alreadyProcessed: true });
         }
 
         const app = typeof raw === "string" ? JSON.parse(raw) : raw;
-        console.log("[verify] app keys:", Object.keys(app));
-        console.log("[verify] processing application for:", app.email, "name:", app.name);
+        console.log("[verify] app email:", app.email, "name:", app.name);
 
-        // ── Send email + log to Sheets ─────────────────────────────────────────
-        await sendApplicationEmail({
+        // ── Delete KV immediately (payment is confirmed) ───────────────────────
+        await kv.del(`pending:${pendingId}`);
+        console.log("[verify] KV deleted, returning success to user");
+
+        // ── Return success to user RIGHT NOW — email runs after ───────────────
+        // Send emails in background (non-fatal — user already redirected)
+        sendApplicationEmail({
             name: app.name,
             email: app.email,
             phone: app.phone,
@@ -66,11 +68,11 @@ export async function POST(request) {
             headshotName: app.headshotName,
             resumeUrl: app.resumeUrl,
             resumeName: app.resumeName,
+        }).then(() => {
+            console.log("[verify] emails sent successfully for:", app.email);
+        }).catch((err) => {
+            console.error("[verify] email failed (payment already recorded):", err.message, "applicant:", app.email, "name:", app.name);
         });
-
-        // ── Cleanup KV ────────────────────────────────────────────────────────
-        await kv.del(`pending:${pendingId}`);
-        console.log("[verify] KV record deleted:", pendingId);
 
         return Response.json({ success: true });
 
