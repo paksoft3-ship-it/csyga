@@ -1,17 +1,10 @@
 import { kv } from "@vercel/kv";
-import { del } from "@vercel/blob";
 import { sendApplicationEmail } from "@/lib/sendApplicationEmail";
 
 const REVOLUT_BASE = process.env.REVOLUT_MODE === "sandbox"
     ? "https://sandbox-merchant.revolut.com/api"
     : "https://merchant.revolut.com/api";
 
-async function fetchFileAsBuffer(url) {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`Failed to fetch file from blob: ${url}`);
-    const arrayBuffer = await res.arrayBuffer();
-    return Buffer.from(new Uint8Array(arrayBuffer));
-}
 
 export async function POST(request) {
     try {
@@ -53,36 +46,6 @@ export async function POST(request) {
         const app = typeof raw === "string" ? JSON.parse(raw) : raw;
         console.log("[verify] processing application for:", app.email);
 
-        // ── Build email attachments ────────────────────────────────────────────
-        const attachments = [];
-
-        if (app.headshotUrl) {
-            try {
-                const buf = await fetchFileAsBuffer(app.headshotUrl);
-                const ext = app.headshotName?.split(".").pop() || "jpg";
-                attachments.push({
-                    filename: app.headshotName || `headshot.${ext}`,
-                    content: buf,
-                    contentType: `image/${ext === "jpg" ? "jpeg" : ext}`,
-                });
-            } catch (e) {
-                console.error("[verify] failed to fetch headshot:", e.message);
-            }
-        }
-
-        if (app.resumeUrl) {
-            try {
-                const buf = await fetchFileAsBuffer(app.resumeUrl);
-                attachments.push({
-                    filename: app.resumeName || "resume.pdf",
-                    content: buf,
-                    contentType: "application/pdf",
-                });
-            } catch (e) {
-                console.error("[verify] failed to fetch resume:", e.message);
-            }
-        }
-
         // ── Send email + log to Sheets ─────────────────────────────────────────
         await sendApplicationEmail({
             name: app.name,
@@ -98,24 +61,15 @@ export async function POST(request) {
             organizations: app.organizations,
             statementOfPurpose: app.statementOfPurpose,
             socialCauses: app.socialCauses,
-            attachments,
-            headshotAttached: !!app.headshotUrl,
-            resumeAttached: !!app.resumeUrl,
+            headshotUrl: app.headshotUrl,
+            headshotName: app.headshotName,
+            resumeUrl: app.resumeUrl,
+            resumeName: app.resumeName,
         });
 
-        // ── Cleanup ────────────────────────────────────────────────────────────
+        // ── Cleanup KV ────────────────────────────────────────────────────────
         await kv.del(`pending:${pendingId}`);
         console.log("[verify] KV record deleted:", pendingId);
-
-        const blobsToDelete = [app.headshotUrl, app.resumeUrl].filter(Boolean);
-        if (blobsToDelete.length > 0) {
-            try {
-                await del(blobsToDelete);
-                console.log("[verify] blob files deleted:", blobsToDelete.length);
-            } catch (e) {
-                console.error("[verify] blob cleanup error:", e.message);
-            }
-        }
 
         return Response.json({ success: true });
 

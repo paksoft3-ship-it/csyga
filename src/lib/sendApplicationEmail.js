@@ -56,9 +56,10 @@ export async function sendApplicationEmail(data) {
     const {
         name, email, phone, city, nationality, passportNumber, dob, gender,
         isStudent, hasVolunteerExp, organizations, statementOfPurpose, socialCauses,
-        attachments = [],
-        headshotAttached = false,
-        resumeAttached = false,
+        headshotUrl = null,
+        headshotName = null,
+        resumeUrl = null,
+        resumeName = null,
     } = data;
 
     if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
@@ -130,9 +131,10 @@ export async function sendApplicationEmail(data) {
                     <p style="background:#f6f7f8;padding:16px;border-radius:6px;line-height:1.6;">${statementOfPurpose}</p>
 
                     <div style="margin-top:20px;padding:12px 16px;border-radius:8px;background:#e8f5e9;border:1px solid #a5d6a7;">
-                        <strong>📎 ${attachments.length} file(s) attached:</strong>
+                        <strong>📎 Uploaded Files:</strong>
                         <ul style="margin:8px 0 0;padding-left:20px;">
-                            ${attachments.map(a => `<li>${a.filename} (${a.contentType})</li>`).join("")}
+                            ${headshotUrl ? `<li>Headshot: <a href="${headshotUrl}">${headshotName || "view file"}</a></li>` : "<li>Headshot: not provided</li>"}
+                            ${resumeUrl ? `<li>Resume: <a href="${resumeUrl}">${resumeName || "view file"}</a></li>` : "<li>Resume: not provided</li>"}
                         </ul>
                     </div>
                     <div style="margin-top:12px;padding:12px 16px;border-radius:8px;background:#e3f2fd;border:1px solid #90caf9;">
@@ -144,7 +146,6 @@ export async function sendApplicationEmail(data) {
                 </div>
             </div>
         `,
-        attachments,
     });
 
     console.log("[email] admin notification sent to", process.env.GMAIL_USER);
@@ -156,8 +157,8 @@ export async function sendApplicationEmail(data) {
                 timestamp, name, email, phone, city, nationality,
                 passportNumber, dob, gender, isStudent, hasVolunteerExp,
                 organizations, socialCauses, statementOfPurpose,
-                headshotAttached ? "Yes" : "No",
-                resumeAttached ? "Yes" : "No",
+                headshotUrl || "No",
+                resumeUrl || "No",
             ]);
         } catch (err) {
             console.error("[sheets] error:", err.message);
