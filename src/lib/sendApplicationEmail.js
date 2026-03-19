@@ -66,6 +66,10 @@ export async function sendApplicationEmail(data) {
         throw new Error("Email service is not configured.");
     }
 
+    if (!email) {
+        throw new Error(`Applicant email is missing. name=${name}`);
+    }
+
     const transporter = getTransporter();
 
     // ── Confirmation email to applicant ───────────────────────────────────
@@ -98,7 +102,7 @@ export async function sendApplicationEmail(data) {
     // ── Internal notification email to admin ──────────────────────────────
     await transporter.sendMail({
         from: `"CSYGA Applications" <${process.env.GMAIL_USER}>`,
-        to: process.env.GMAIL_USER,
+        to: [process.env.GMAIL_USER, "info@csyga.org"].filter(Boolean).join(", "),
         replyTo: email,
         subject: `New Application – ${name}`,
         html: `

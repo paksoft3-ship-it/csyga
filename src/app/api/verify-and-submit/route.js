@@ -44,7 +44,8 @@ export async function POST(request) {
         }
 
         const app = typeof raw === "string" ? JSON.parse(raw) : raw;
-        console.log("[verify] processing application for:", app.email);
+        console.log("[verify] app keys:", Object.keys(app));
+        console.log("[verify] processing application for:", app.email, "name:", app.name);
 
         // ── Send email + log to Sheets ─────────────────────────────────────────
         await sendApplicationEmail({
