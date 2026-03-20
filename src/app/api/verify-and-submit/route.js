@@ -44,13 +44,8 @@ export async function POST(request) {
         const app = typeof raw === "string" ? JSON.parse(raw) : raw;
         console.log("[verify] app email:", app.email, "name:", app.name);
 
-        // ── Delete KV immediately (payment is confirmed) ───────────────────────
-        await kv.del(`pending:${pendingId}`);
-        console.log("[verify] KV deleted, returning success to user");
-
-        // ── Return success to user RIGHT NOW — email runs after ───────────────
-        // Send emails in background (non-fatal — user already redirected)
-        sendApplicationEmail({
+        // ── Send email + log to Sheets ─────────────────────────────────────────
+        await sendApplicationEmail({
             name: app.name,
             email: app.email,
             phone: app.phone,
@@ -68,11 +63,12 @@ export async function POST(request) {
             headshotName: app.headshotName,
             resumeUrl: app.resumeUrl,
             resumeName: app.resumeName,
-        }).then(() => {
-            console.log("[verify] emails sent successfully for:", app.email);
-        }).catch((err) => {
-            console.error("[verify] email failed (payment already recorded):", err.message, "applicant:", app.email, "name:", app.name);
         });
+        console.log("[verify] emails sent for:", app.email);
+
+        // ── Cleanup KV ────────────────────────────────────────────────────────
+        await kv.del(`pending:${pendingId}`);
+        console.log("[verify] KV deleted:", pendingId);
 
         return Response.json({ success: true });
 
