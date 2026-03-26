@@ -53,7 +53,7 @@ async function appendToSheet(sheetId, row) {
  * Send application email + confirmation to applicant + log to Google Sheets.
  */
 export async function sendApplicationEmail(data) {
-    const {
+    let {
         name, email, phone, city, nationality, passportNumber, dob, gender,
         isStudent, hasVolunteerExp, organizations, statementOfPurpose, socialCauses,
         headshotUrl = null,
@@ -61,6 +61,8 @@ export async function sendApplicationEmail(data) {
         resumeUrl = null,
         resumeName = null,
     } = data;
+
+    email = typeof email === "string" ? email.trim() : email;
 
     if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
         throw new Error("Email service is not configured.");
