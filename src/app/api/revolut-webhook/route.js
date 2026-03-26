@@ -11,6 +11,8 @@ async function fetchFileAsBuffer(url) {
     return Buffer.from(new Uint8Array(arrayBuffer));
 }
 
+
+
 // Verify the Revolut-Signature HMAC-SHA256 header
 function verifySignature(rawBody, signatureHeader, secret) {
     // Header format: "v1=<timestamp>.<signature>"
